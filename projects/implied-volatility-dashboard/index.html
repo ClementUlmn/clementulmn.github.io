@@ -1,1 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Correlation and cointegration research project for cross-asset trading signals."
+    />
+    <title>Correlation & Cointegration</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="../../index.html">Your Name</a>
+        <div class="nav-links">
+          <a href="../../index.html#projects">Projects</a>
+          <a href="../../index.html#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
 
+    <main>
+      <div class="hero project-detail-hero">
+        <div class="reveal">
+          <a class="back-link" href="../../index.html#projects">Back to projects</a>
+          <p class="eyebrow">Project 02</p>
+          <h1>Correlation & Cointegration</h1>
+          <p>Cross-asset research to identify relationships, mean-reversion opportunities, and trading signals.</p>
+          <div class="actions">
+            <a class="button primary" href="https://github.com/your-username/asset-correlation-cointegration" target="_blank" rel="noreferrer">View full code</a>
+            <a class="button secondary" href="https://implied-volatility-dashboard-hzn7ckntvlsqtecdxnnvbs.streamlit.app/" target="_blank" rel="noreferrer">Live demo</a>
+          </div>
+        </div>
+      </div>
+
+      <section class="content-section">
+        <div class="detail-grid">
+          <article class="detail-panel reveal">
+            <h3>Finance objective</h3>
+            <p>
+              Test whether two assets share a stable long-term relationship and use the spread deviation to generate potential statistical arbitrage signals.
+            </p>
+            <div class="metric-grid">
+              <div class="metric">
+                <strong>Input</strong>
+                <span>Asset prices and returns</span>
+              </div>
+              <div class="metric">
+                <strong>Method</strong>
+                <span>Rolling correlation, cointegration, z-score</span>
+              </div>
+              <div class="metric">
+                <strong>Output</strong>
+                <span>Pairs, spreads, entry signals</span>
+              </div>
+            </div>
+          </article>
+
+          <aside class="detail-panel reveal">
+            <h3>What it shows</h3>
+            <ul>
+              <li>Market data analysis</li>
+              <li>Statistical testing</li>
+              <li>Trading signal design</li>
+              <li>Research mindset for markets</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <div class="detail-grid">
+          <article class="detail-panel reveal">
+            <h3>Methodology</h3>
+            <ul>
+              <li>Download and clean historical price series.</li>
+              <li>Compute rolling correlations to detect changing relationships.</li>
+              <li>Run cointegration tests on selected asset pairs.</li>
+              <li>Build a z-score signal from the spread.</li>
+            </ul>
+          </article>
+
+          <article class="code-panel reveal">
+            <h3>Key code excerpt</h3>
+            <pre><code>spread = asset_a - hedge_ratio * asset_b
+z_score = (spread - spread.rolling(60).mean()) / spread.rolling(60).std()
+
+signals = pd.Series(index=spread.index, dtype="float")
+signals[z_score &lt; -2] = 1
+signals[z_score &gt; 2] = -1</code></pre>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> Your Name</span>
+      <span>Correlation & Cointegration</span>
+    </footer>
+
+    <script>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.14 });
+      document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
+      document.querySelector("#year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

@@ -1,1 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Streamlit market dashboard project for equities, ratios, dividends, and indicators."
+    />
+    <title>Market Dashboard</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="../../index.html">Your Name</a>
+        <div class="nav-links">
+          <a href="../../index.html#projects">Projects</a>
+          <a href="../../index.html#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
 
+    <main>
+      <div class="hero project-detail-hero">
+        <div class="reveal">
+          <a class="back-link" href="../../index.html#projects">Back to projects</a>
+          <p class="eyebrow">Project 03</p>
+          <h1>Market Dashboard</h1>
+          <p>Interactive Streamlit dashboard for equity analysis, market indicators, and concise investment views.</p>
+          <div class="actions">
+            <a class="button primary" href="https://github.com/your-username/market-dashboard" target="_blank" rel="noreferrer">View full code</a>
+            <a class="button secondary" href="https://your-market-dashboard.streamlit.app" target="_blank" rel="noreferrer">Live demo</a>
+          </div>
+        </div>
+
+        <aside class="market-card reveal project-summary" aria-label="Project summary">
+          <div class="market-row">
+            <div>
+              <strong>Interface</strong>
+              <span>Streamlit dashboard</span>
+            </div>
+            <b class="up">App</b>
+          </div>
+          <div class="market-row">
+            <div>
+              <strong>Analysis</strong>
+              <span>Ratios and prices</span>
+            </div>
+            <b class="up">Equity</b>
+          </div>
+          <div class="market-row">
+            <div>
+              <strong>Output</strong>
+              <span>Charts and summary</span>
+            </div>
+            <b class="down">Risk</b>
+          </div>
+        </aside>
+      </div>
+
+      <section class="content-section">
+        <div class="detail-grid">
+          <article class="detail-panel reveal">
+            <h3>Finance objective</h3>
+            <p>
+              Build a clean interface for analyzing listed companies with price trends, valuation ratios, dividends, and market context.
+            </p>
+            <div class="metric-grid">
+              <div class="metric">
+                <strong>Input</strong>
+                <span>Ticker and financial data</span>
+              </div>
+              <div class="metric">
+                <strong>Method</strong>
+                <span>Data cleaning and dashboard design</span>
+              </div>
+              <div class="metric">
+                <strong>Output</strong>
+                <span>Charts, ratios, summary</span>
+              </div>
+            </div>
+          </article>
+
+          <aside class="detail-panel reveal">
+            <h3>What it shows</h3>
+            <ul>
+              <li>Data product thinking</li>
+              <li>Equity analysis workflow</li>
+              <li>Streamlit deployment</li>
+              <li>Recruiter-friendly presentation</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <div class="detail-grid">
+          <article class="detail-panel reveal">
+            <h3>Methodology</h3>
+            <ul>
+              <li>Retrieve price and fundamentals data for a selected ticker.</li>
+              <li>Calculate and display relevant valuation and dividend metrics.</li>
+              <li>Visualize performance and market context.</li>
+              <li>Deploy the dashboard with Streamlit Community Cloud.</li>
+            </ul>
+          </article>
+
+          <article class="code-panel reveal">
+            <h3>Key code excerpt</h3>
+            <pre><code>ticker = st.text_input("Ticker", "AAPL")
+data = yf.download(ticker, period="2y")
+
+st.line_chart(data["Close"])
+st.metric("Last close", round(data["Close"].iloc[-1], 2))</code></pre>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> Your Name</span>
+      <span>Market Dashboard</span>
+    </footer>
+
+    <script>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.14 });
+      document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
+      document.querySelector("#year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Finance projects portfolio focused on market finance, quantitative analysis, and trading research."
+    />
+    <title>Finance Projects Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="#top">Your Name</a>
+        <div class="nav-links">
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="top">
+      <div class="hero">
+        <div class="reveal">
+          <p class="eyebrow">Market finance portfolio</p>
+          <h1>Finance projects for trading roles.</h1>
+          <p>Quantitative research, option pricing, and market dashboards built with Python.</p>
+          <div class="actions">
+            <a class="button primary" href="#projects">View projects</a>
+            <a class="button secondary" href="mailto:your.email@example.com">Contact</a>
+          </div>
+        </div>
+
+        <aside class="market-card reveal" aria-label="Finance focus">
+          <div class="market-row">
+            <div>
+              <strong>Options</strong>
+              <span>Pricing, Greeks</span>
+            </div>
+            <b class="up">Python</b>
+          </div>
+          <div class="market-row">
+            <div>
+              <strong>Trading</strong>
+              <span>Signals, statistics</span>
+            </div>
+            <b class="up">Research</b>
+          </div>
+          <div class="market-row">
+            <div>
+              <strong>Markets</strong>
+              <span>Equities, FX, macro</span>
+            </div>
+            <b class="down">Risk</b>
+          </div>
+        </aside>
+      </div>
+
+      <section id="projects" aria-labelledby="projects-title">
+        <div class="section-head reveal">
+          <h2 id="projects-title">Projects</h2>
+          <p class="section-note">Clear code, financial logic, and concise documentation.</p>
+        </div>
+
+        <div class="projects">
+          <article class="project reveal">
+            <div class="number">01</div>
+            <div>
+              <h3>Monte Carlo Option Pricer</h3>
+              <p>European option pricing with simulation, Black-Scholes benchmark, and Greeks.</p>
+              <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">Options</span>
+                <span class="tag">Monte Carlo</span>
+              </div>
+            </div>
+            <a class="project-link" href="projects/monte-carlo-option-pricer/">View project</a>
+          </article>
+
+          <article class="project reveal">
+            <div class="number">02</div>
+            <div>
+              <h3>Correlation & Cointegration</h3>
+              <p>Cross-asset analysis to detect statistical relationships and trading signals.</p>
+              <div class="tags">
+                <span class="tag">pandas</span>
+                <span class="tag">Stats</span>
+                <span class="tag">Trading</span>
+              </div>
+            </div>
+            <a class="project-link" href="projects/correlation-cointegration/">View project</a>
+          </article>
+
+          <article class="project reveal">
+            <div class="number">03</div>
+            <div>
+              <h3>Market Dashboard</h3>
+              <p>Interactive dashboard for prices, ratios, dividends, and market indicators.</p>
+              <div class="tags">
+                <span class="tag">Streamlit</span>
+                <span class="tag">Equities</span>
+                <span class="tag">Dashboard</span>
+              </div>
+            </div>
+            <a class="project-link" href="projects/market-dashboard/">View project</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="contact" id="contact" aria-labelledby="contact-title">
+        <div class="contact-box reveal">
+          <div>
+            <p class="eyebrow">Contact</p>
+            <h2 id="contact-title">Open to finance internships.</h2>
+            <p>Market finance, trading, quantitative research, and investment analysis.</p>
+          </div>
+          <div class="actions compact-actions">
+            <a class="button primary" href="mailto:your.email@example.com">Email me</a>
+            <a class="button secondary" href="https://github.com/your-username" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> Your Name</span>
+      <span>Finance Projects Portfolio</span>
+    </footer>
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.14 }
+      );
+
+      document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
+      document.querySelector("#year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

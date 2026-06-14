@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Python Streamlit dashboard for option risk analysis, visualizing option prices and Greeks curves across spot scenarios with Black-Scholes, Monte Carlo pricing, Yahoo Finance option chains, and a smile-adjusted volatility proxy."
+      content="Python Streamlit dashboard for option risk analysis, modelling option prices and first-, second-, and third-order Greeks for vanilla and exotic options across underlying price scenarios using Monte Carlo finite differences, Black-Scholes reference pricing, Yahoo Finance option chains, and a volatility-skew proxy."
     />
     <title>Greeks Curves Dashboard</title>
     <link rel="stylesheet" href="../../style.css" />
@@ -142,7 +142,7 @@
           <a class="back-link" href="../../index.html#projects">Back to projects</a>
           <p class="eyebrow">Project 03</p>
           <h1>Greeks Curves Dashboard</h1>
-          <p>Interactive Python dashboard that models prices and first-, second-, and third-order Greeks for vanilla and exotic options across underlying price scenarios, with volatility-skew model and dynamic parameter stress testing.</p>
+          <p>Interactive Python dashboard that models option prices and first-, second-, and third-order Greeks for vanilla and exotic options across underlying price scenarios, using Monte Carlo finite differences, a Black-Scholes reference module, an optional volatility-skew proxy, and dynamic parameter stress testing.</p>
           <div class="actions">
             <a class="button primary" href="https://greeks-curves-dashboard-qwu3gbd7v2fwc7qqbq8h2s.streamlit.app/" target="_blank" rel="noreferrer">Live demo</a>
             <a class="button secondary" href="https://github.com/ClementUlmn/Greeks-Curves-Dashboard/blob/main/app.py" target="_blank" rel="noreferrer">View full code</a>
@@ -155,13 +155,16 @@
           <article class="breakdown-card reveal">
             <h3>1. Project Objective</h3>
             <p>
-              The purpose of this project is to build a derivatives risk dashboard focused on visualizing how option prices and Greeks evolve when the underlying price changes. Instead of returning a single static Greek value, the application generates full curves across a configurable spot grid and adds reference markers for spot, strike, forward price, and barrier levels.
+              The purpose of this project is to build a derivatives risk dashboard that visualizes how option prices and Greeks evolve as the underlying asset level changes. Instead of returning a single static sensitivity, the application generates full curves across a configurable spot grid for both vanilla and exotic options, with reference markers for spot, strike, forward price, and barrier levels.
+            </p>
+            <p>
+              The curve engine estimates first-, second-, and third-order Greeks through Monte Carlo pricing combined with finite-difference bumps on spot, volatility, interest rates, and time to maturity. A Black-Scholes module is also implemented for vanilla pricing reference and implied-volatility calibration, while a volatility-skew proxy can be applied to test how smile-adjusted assumptions affect each Greek.
             </p>
             <ul>
               <li>Input: manual option parameters or Yahoo Finance option chains.</li>
-              <li>Pricing: analytical Black-Scholes for vanilla products and Monte Carlo simulation for exotic payoffs.</li>
+              <li>Pricing and Greeks: Monte Carlo simulation with finite-difference sensitivities drives the curve engine for vanilla and exotic options, while Black-Scholes is used as a vanilla pricing reference and for implied-volatility calibration.</li>
               <li>Risk analytics: first-, second-, and third-order Greeks, including Delta, Gamma, Vega, Vanna, Volga, Charm, Speed, Color, Zomma, Veta, Vera, and Ultima.</li>
-              <li>Output: current price/Greeks, interactive Greek curves, scenario comparison, and volatility-smile diagnostics.</li>
+              <li>Output: current price/Greeks, interactive Greek curves, scenario comparison, volatility-smile diagnostics, and parameter stress testing.</li>
             </ul>
           </article>
 
@@ -279,7 +282,7 @@ def load_dividend_yield(symbol, spot):
           <article class="breakdown-card reveal">
             <h3>5. Pricing Engines: Black-Scholes and Monte Carlo</h3>
             <p>
-              Vanilla calls and puts are priced with Black-Scholes. Non-vanilla payoffs are handled with a Monte Carlo engine that simulates risk-neutral geometric Brownian motion, evaluates terminal or path-dependent payoffs, and discounts the expected payoff back to present value.
+              The application includes a Black-Scholes module for vanilla option pricing and implied-volatility calibration. The main curve-generation workflow, however, relies on Monte Carlo pricing and finite-difference bumps, which allows the same Greeks framework to be applied consistently to vanilla options and to exotic payoffs such as digital, barrier, gap, and capped options.
             </p>
             <div class="code-window">
               <div class="code-window-header">
@@ -345,7 +348,7 @@ if option_type in BARRIER_TYPES:
           <article class="breakdown-card reveal">
             <h3>7. Finite-Difference Greeks Engine</h3>
             <p>
-              The Greeks are estimated by bumping spot, volatility, interest rates, and time to maturity. The engine caches Monte Carlo prices for repeated parameter combinations, which avoids recomputing the same scenario multiple times when higher-order Greeks require nested finite differences.
+              The Greeks are estimated by bumping spot, volatility, interest rates, and time to maturity around the selected option setup. This finite-difference framework is used to model first-, second-, and third-order Greeks across the underlying price grid, and the engine caches Monte Carlo prices for repeated parameter combinations to reduce redundant computations when higher-order Greeks require nested sensitivities.
             </p>
             <div class="code-window">
               <div class="code-window-header">
@@ -453,7 +456,7 @@ def create_greek_curve_figure(curve_df, greek_name, current_spot, strike, forwar
           <article class="breakdown-card reveal">
             <h3>10. Scenario Analysis Interface</h3>
             <p>
-              After generating the base curves, users can open an interactive scenario tab and modify spot, strike, maturity, volatility, rates, dividend yield, barrier, or extra strike. The app recalculates a new curve and overlays it against the base case, making the dashboard useful for stress testing and sensitivity analysis.
+              After generating the base curves, users can open an interactive scenario tab and modify key parameters such as spot, strike, maturity, volatility, risk-free rate, dividend yield, barrier level, cash payout, cap, floor, or extra strike. The app recalculates the selected Greeks and overlays the new curves against the base case, making it possible to see directly how each parameter changes the option's risk profile.
             </p>
             <div class="code-window">
               <div class="code-window-header">

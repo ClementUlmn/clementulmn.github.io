@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Interactive Python and Streamlit option pricer comparing Black-Scholes and Monte Carlo methods for vanilla and exotic options, with Greeks, volatility inputs, Yahoo Finance data, and payoff/path visualisations."
+    />
+    <title>Option Pricer</title>
+    <link rel="stylesheet" href="../../style.css" />
+    <style>
+      .project-breakdown {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .breakdown-card {
+        width: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.045);
+        padding: clamp(22px, 4vw, 38px);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
+      }
+
+      .breakdown-card h3 {
+        margin: 0 0 12px;
+        font-size: clamp(1.25rem, 2vw, 1.75rem);
+      }
+
+      .breakdown-card p {
+        max-width: 850px;
+        margin: 0 0 20px;
+        color: var(--muted, #a8b0bd);
+        line-height: 1.7;
+      }
+
+      .breakdown-card ul {
+        margin: 0 0 22px;
+        padding-left: 18px;
+        color: var(--muted, #a8b0bd);
+        line-height: 1.8;
+      }
+
+      .code-window {
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        background: #0b1020;
+      }
+
+      .code-window-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        color: #8ea0b8;
+        font-size: 0.82rem;
+      }
+
+      .code-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: #42d392;
+      }
+
+      .code-dot:nth-child(2) {
+        background: #f6c177;
+      }
+
+      .code-dot:nth-child(3) {
+        background: #ef6b73;
+        margin-right: 8px;
+      }
+
+      .code-window pre {
+        margin: 0;
+        padding: 20px;
+        overflow-x: auto;
+      }
+
+      .code-window code {
+        color: #d9e2f1;
+        font-size: 0.92rem;
+        line-height: 1.7;
+      }
+
+      .code-keyword {
+        color: #82aaff;
+      }
+
+      .code-function {
+        color: #7dd3fc;
+      }
+
+      .code-string {
+        color: #c3e88d;
+      }
+
+      .code-number {
+        color: #f78c6c;
+      }
+
+      .code-comment {
+        color: #637083;
+      }
+
+      .code-operator {
+        color: #c792ea;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="../../index.html">Uhlmann Clement</a>
+        <div class="nav-links">
+          <a href="../../index.html#projects">Projects</a>
+          <a href="../../index.html#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="hero project-detail-hero">
+        <div class="reveal">
+          <a class="back-link" href="../../index.html#projects">Back to projects</a>
+          <p class="eyebrow">Project 03</p>
+          <h1>Option Pricer</h1>
+          <p>
+            Interactive Python dashboard to price vanilla and exotic options with Black-Scholes and Monte Carlo methods, compare risk sensitivities, and visualise payoff profiles and simulated underlying paths.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="#" target="_blank" rel="noreferrer">Live demo</a>
+            <a class="button secondary" href="#" target="_blank" rel="noreferrer">View full code</a>
+          </div>
+        </div>
+      </div>
+
+      <section class="content-section">
+        <div class="project-breakdown">
+          <article class="breakdown-card reveal">
+            <h3>1. Project Objective</h3>
+            <p>
+              The goal of this project is to build a complete option-pricing workstation where users can select market data or manual inputs, choose a pricing methodology, and obtain both theoretical prices and risk sensitivities in a single Streamlit interface.
+            </p>
+            <ul>
+              <li>Input: Yahoo Finance option chains or fully manual parameters.</li>
+              <li>Core models: Black-Scholes closed-form pricing and Monte Carlo simulation.</li>
+              <li>Output: option price, Greeks, payoff diagram, Monte Carlo paths, and model comparison.</li>
+              <li>Coverage: vanilla calls and puts, digital options, barrier options, gap options, and capped options.</li>
+            </ul>
+          </article>
+
+          <article class="breakdown-card reveal">
+            <h3>2. Market Data and Quote Cleaning</h3>
+            <p>
+              The application retrieves listed option chains from Yahoo Finance, filters out unusable maturities and illiquid quotes, and computes the bid-ask mid-price used as the market reference for volatility calibration.
+            </p>
+            <div class="code-window">
+              <div class="code-window-header">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span>app.py - option chain extraction</span>
+              </div>
+              <pre><code><span class="code-keyword">def</span> <span class="code-function">find_data</span>(ticker, option):
+    dfs <span class="code-operator">=</span> []
+    maturities <span class="code-operator">=</span> ticker.options
+    today <span class="code-operator">=</span> datetime.today()
+
+    <span class="code-keyword">for</span> maturity <span class="code-keyword">in</span> maturities:
+        maturity_datetime <span class="code-operator">=</span> datetime.strptime(maturity, <span class="code-string">"%Y-%m-%d"</span>)
+
+        <span class="code-keyword">if</span> maturity_datetime <span class="code-operator">&lt;=</span> today <span class="code-operator">+</span> timedelta(days<span class="code-operator">=</span><span class="code-number">1</span>):
+            <span class="code-keyword">continue</span>
+
+        chain <span class="code-operator">=</span> ticker.option_chain(maturity)
+
+        <span class="code-keyword">if</span> option <span class="code-operator">==</span> <span class="code-string">"Calls"</span>:
+            df <span class="code-operator">=</span> pd.DataFrame(chain.calls)
+            df[<span class="code-string">"option_type"</span>] <span class="code-operator">=</span> <span class="code-string">"Calls"</span>
+        <span class="code-keyword">elif</span> option <span class="code-operator">==</span> <span class="code-string">"Puts"</span>:
+            df <span class="code-operator">=</span> pd.DataFrame(chain.puts)
+            df[<span class="code-string">"option_type"</span>] <span class="code-operator">=</span> <span class="code-string">"Puts"</span>
+
+        df <span class="code-operator">=</span> df[[<span class="code-string">"strike"</span>, <span class="code-string">"bid"</span>, <span class="code-string">"ask"</span>, <span class="code-string">"currency"</span>, <span class="code-string">"option_type"</span>]]
+        df[<span class="code-string">"maturity"</span>] <span class="code-operator">=</span> maturity
+        dfs.append(df)
+
+    data <span class="code-operator">=</span> pd.concat(dfs, ignore_index<span class="code-operator">=</span><span class="code-keyword">True</span>)
+    data[<span class="code-string">"mid"</span>] <span class="code-operator">=</span> (data[<span class="code-string">"bid"</span>] <span class="code-operator">+</span> data[<span class="code-string">"ask"</span>]) <span class="code-operator">/</span> <span class="code-number">2</span>
+    data <span class="code-operator">=</span> data.dropna(subset<span class="code-operator">=</span>[<span class="code-string">"strike"</span>, <span class="code-string">"bid"</span>, <span class="code-string">"ask"</span>, <span class="code-string">"mid"</span>])
+    <span class="code-keyword">return</span> data[data[<span class="code-string">"mid"</span>] <span class="code-operator">&gt;</span> <span class="code-number">0</span>]</code></pre>
+            </div>
+          </article>
+
+          <article class="breakdown-card reveal">
+            <h3>3. Risk-Free Rate and Dividend Inputs</h3>
+            <p>
+              The pricing engine uses a currency-aware risk-free rate and automatically estimates the dividend yield from Yahoo Finance. This allows the model to use a cost-of-carry framework rather than assuming a zero-dividend underlying.
+            </p>
+            <div class="code-window">
+              <div class="code-window-header">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span>app.py - rates and dividends</span>
+              </div>
+              <pre><code><span class="code-keyword">def</span> <span class="code-function">risk_free_rate</span>(data):
+    currency <span class="code-operator">=</span> data[<span class="code-string">"currency"</span>].iloc[<span class="code-number">0</span>]
+
+    <span class="code-keyword">if</span> currency <span class="code-operator">==</span> <span class="code-string">"USD"</span>:
+        url <span class="code-operator">=</span> <span class="code-string">"https://fred.stlouisfed.org/graph/fredgraph.csv?id=SOFR"</span>
+        df <span class="code-operator">=</span> pd.read_csv(url)
+        rf <span class="code-operator">=</span> float(df[df[<span class="code-string">"SOFR"</span>] <span class="code-operator">!=</span> <span class="code-string">"."</span>][<span class="code-string">"SOFR"</span>].iloc[<span class="code-operator">-</span><span class="code-number">1</span>]) <span class="code-operator">/</span> <span class="code-number">100</span>
+
+    <span class="code-keyword">if</span> currency <span class="code-operator">==</span> <span class="code-string">"EUR"</span>:
+        url <span class="code-operator">=</span> <span class="code-string">"https://fred.stlouisfed.org/graph/fredgraph.csv?id=ECBESTRVOLWGTTRMDMNRT"</span>
+        df <span class="code-operator">=</span> pd.read_csv(url)
+        rf <span class="code-operator">=</span> float(df[df[<span class="code-string">"ECBESTRVOLWGTTRMDMNRT"</span>] <span class="code-operator">!=</span> <span class="code-string">"."</span>][<span class="code-string">"ECBESTRVOLWGTTRMDMNRT"</span>].iloc[<span class="code-operator">-</span><span class="code-number">1</span>]) <span class="code-operator">/</span> <span class="code-number">100</span>
+
+    <span class="code-keyword">return</span> rf
+
+<span class="code-keyword">def</span> <span class="code-function">get_dividend_yield_from_yahoo</span>(symbol, spot):
+    dividends <span class="code-operator">=</span> yf.Ticker(symbol).dividends
+    annual_dividend <span class="code-operator">=</span> dividends[dividends.index <span class="code-operator">&gt;=</span> one_year_ago].sum()
+    <span class="code-keyword">return</span> annual_dividend <span class="code-operator">/</span> spot</code></pre>
+            </div>
+          </article>
+
+          <article class="breakdown-card reveal">
+            <h3>4. Black-Scholes Pricing Engine</h3>
+            <p>
+              The Black-Scholes module prices standard calls and puts analytically. It also computes the main first-order and second-order sensitivities used in risk management: delta, gamma, vega, theta, rho, volga, and vanna.
+            </p>
+            <div class="code-window">
+              <div class="code-window-header">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span>app.py - Black-Scholes core</span>
+              </div>
+              <pre><code><span class="code-keyword">def</span> <span class="code-function">vanilla_price</span>(S, K, tau, sigma, r, q, opt):
+    d1 <span class="code-operator">=</span> (np.log(S <span class="code-operator">/</span> K) <span class="code-operator">+</span> (r <span class="code-operator">-</span> q <span class="code-operator">+</span> <span class="code-number">0.5</span> <span class="code-operator">*</span> sigma<span class="code-operator">**</span><span class="code-number">2</span>) <span class="code-operator">*</span> tau) <span class="code-operator">/</span> (sigma <span class="code-operator">*</span> np.sqrt(tau))
+    d2 <span class="code-operator">=</span> d1 <span class="code-operator">-</span> sigma <span class="code-operator">*</span> np.sqrt(tau)
+
+    <span class="code-keyword">if</span> opt <span class="code-operator">==</span> <span class="code-string">"Calls"</span>:
+        <span class="code-keyword">return</span> S <span class="code-operator">*</span> np.exp(<span class="code-operator">-</span>q <span class="code-operator">*</span> tau) <span class="code-operator">*</span> norm.cdf(d1) <span class="code-operator">-</span> K <span class="code-operator">*</span> np.exp(<span class="code-operator">-</span>r <span class="code-operator">*</span> tau) <span class="code-operator">*</span> norm.cdf(d2)
+
+    <span class="code-keyword">if</span> opt <span class="code-operator">==</span> <span class="code-string">"Puts"</span>:
+        <span class="code-keyword">return</span> K <span class="code-operator">*</span> np.exp(<span class="code-operator">-</span>r <span class="code-operator">*</span> tau) <span class="code-operator">*</span> norm.cdf(<span class="code-operator">-</span>d2) <span class="code-operator">-</span> S <span class="code-operator">*</span> np.exp(<span class="code-operator">-</span>q <span class="code-operator">*</span> tau) <span class="code-operator">*</span> norm.cdf(<span class="code-operator">-</span>d1)
+
+gamma <span class="code-operator">=</span> np.exp(<span class="code-operator">-</span>q <span class="code-operator">*</span> T) <span class="code-operator">*</span> norm.pdf(d1) <span class="code-operator">/</span> (spot <span class="code-operator">*</span> IV <span class="code-operator">*</span> np.sqrt(T))
+vega <span class="code-operator">=</span> spot <span class="code-operator">*</span> np.exp(<span class="code-operator">-</span>q <span class="code-operator">*</span> T) <span class="code-operator">*</span> norm.pdf(d1) <span class="code-operator">*</span> np.sqrt(T)</code></pre>
+            </div>
+          </article>
+
+          <article class="breakdown-card reveal">
+            <h3>5. Monte Carlo Simulation Engine</h3>
+            <p>
+              The Monte Carlo engine simulates geometric Brownian motion paths under the risk-neutral measure. It discounts the average payoff and supports a large number of simulations with batching for performance and stability.
+            </p>
+            <div class="code-window">
+              <div class="code-window-header">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span>app.py - Monte Carlo paths</span>
+              </div>
+              <pre><code><span class="code-keyword">def</span> <span class="code-function">simulate_paths</span>(S0, tau, sigma, r, q, rng_seed):
+    n_steps <span class="code-operator">=</span> max(<span class="code-number">1</span>, int(np.ceil(tau <span class="code-operator">*</span> steps_per_year)))
+    dt <span class="code-operator">=</span> tau <span class="code-operator">/</span> n_steps
+
+    rng <span class="code-operator">=</span> np.random.default_rng(rng_seed)
+    Z <span class="code-operator">=</span> rng.standard_normal((num_simulations, n_steps))
+
+    log_returns <span class="code-operator">=</span> (r <span class="code-operator">-</span> q <span class="code-operator">-</span> <span class="code-number">0.5</span> <span class="code-operator">*</span> sigma<span class="code-operator">**</span><span class="code-number">2</span>) <span class="code-operator">*</span> dt <span class="code-operator">+</span> sigma <span class="code-operator">*</span> np.sqrt(dt) <span class="code-operator">*</span> Z
+    S_paths <span class="code-operator">=</span> S0 <span class="code-operator">*</span> np.exp(np.cumsum(log_returns, axis<span class="code-operator">=</span><span class="code-number">1</span>))
+    S_paths <span class="code-operator">=</span> np.column_stack((np.full(num_simulations, S0), S_paths))
+
+    <span class="code-keyword">return</span> S_paths
+
+price <span class="code-operator">=</span> np.exp(<span class="code-operator">-</span>r <span class="code-operator">*</span> tau) <span class="code-operator">*</span> np.mean(payoffs)</code></pre>
+            </div>
+          </article>
+
+          <article class="breakdown-card reveal">
+            <h3>6. Exotic Option Coverage</h3>
+            <p>
+              Beyond vanilla options, the dashboard supports digital cash-or-nothing and asset-or-nothing options, up-and-in/up-and-out and down-and-in/down-and-out barriers, gap options, and capped payoffs. This makes the project closer to a derivatives analytics tool than a simple Black-Scholes calculator.
+            </p>
+            <div class="code-window">
+              <div class="code-window-header">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span>app.py - supported option types</span>
+              </div>
+              <pre><code>EXOTIC_OPTION_TYPES <span class="code-operator">=</span> [
+    <span class="code-string">"Calls"</span>, <span class="code-string">"Puts"</span>,
+    <span class="code-string">"Digital Calls Cash or Nothing"</span>, <span class="code-string">"Digital Puts Cash or Nothing"</span>,
+    <span class="code-string">"Digital Calls Asset or Nothing"</span>, <span class="code-string">"Digital Puts Asset or Nothing"</span>,
+    <span class="code-string">"Calls Up and In"</span>, <span class="code-string">"Calls Up and Out"</span>,
+    <span class="code-string">"Calls Down and In"</span>, <span class="code-string">"Calls Down and Out"</span>,
+    <span class="code-string">"Puts Up and In"</span>, <span class="code-string">"Puts Up and Out"</span>,
+    <span class="code-string">"Puts Down and In"</span>, <span class="code-string">"Puts Down and Out"</span>,
+    <span class="code-string">"Gap Calls"</span>, <span class="code-string">"Gap Puts"</span>,
+    <span class="code-string">"Capped Calls"</span>, <span class="code-string">"Capped Puts"</span>
+]
+
+<span class="code-keyword">if</span> option_type <span class="code-keyword">in</span> BARRIER_TYPES:
+    barrier_touched <span class="code-operator">=</span> np.max(S_paths, axis<span class="code-operator">=</span><span class="code-number">1</span>) <span class="code-operator">&gt;=</span> barrier
+    payoffs <span class="code-operator">=</span> np.where(barrier_touched, vanilla_payoff, <span class="code-number">0.0</span>)</code></pre>
+            </div>
+          </article>
+
+          <article class="breakdown-card reveal">
+            <h3>7. Smile-Adjusted Volatility Proxy</h3>
+            <p>
+              For Yahoo Finance inputs, the application does not rely directly on the platform's implied volatility field. It solves vanilla implied volatilities from bid-ask mid-prices and can build a smile-adjusted proxy for exotic products by combining the relevant volatility points.
+            </p>
+            <div class="code-window">
+              <div class="code-window-header">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span>app.py - volatility proxy</span>
+              </div>
+              <pre><code><span class="code-keyword">def</span> <span class="code-function">get_quote_implied_volatility</span>(ticker, quote_row, spot, rf, dividend_yield):
+    <span class="code-comment"># Every vanilla IV used by the app is solved from the bid/ask mid via Newton-Raphson.</span>
+    implied_volatility <span class="code-operator">=</span> newton_raphson(
+        ticker, quote_row, <span class="code-number">0.2</span>, spot, rf,
+        dividend_yield<span class="code-operator">=</span>dividend_yield
+    )
+
+    <span class="code-keyword">if</span> np.isfinite(implied_volatility) <span class="code-keyword">and</span> implied_volatility <span class="code-operator">&gt;</span> <span class="code-number">0</span>:
+        <span class="code-keyword">return</span> float(implied_volatility), <span class="code-string">"Newton-Raphson from vanilla mid"</span>
+
+    <span class="code-keyword">return</span> np.nan, <span class="code-string">"Unavailable from Newton-Raphson"</span>
+
+<span class="code-keyword">if</span> option_type <span class="code-keyword">in</span> BARRIER_TYPES:
+    effective_iv <span class="code-operator">=</span> weighted_average_available([
+        (<span class="code-number">0.50</span>, strike_iv),
+        (<span class="code-number">0.30</span>, barrier_iv),
+        (<span class="code-number">0.20</span>, atm_iv),
+    ])</code></pre>
+            </div>
+          </article>
+
+          <article class="breakdown-card reveal">
+            <h3>8. Greeks and Model Comparison</h3>
+            <p>
+              The results dashboard compares Black-Scholes and Monte Carlo outputs, displays a full table of Greeks, and highlights the difference between both models. For non-vanilla payoffs, sensitivities are estimated through finite-difference bumps on spot, volatility, rates, and time.
+            </p>
+            <div class="code-window">
+              <div class="code-window-header">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span>app.py - finite-difference Greeks</span>
+              </div>
+              <pre><code>hS <span class="code-operator">=</span> max(parameters[<span class="code-string">"spot"</span>] <span class="code-operator">*</span> SPOT_BUMP_RELATIVE, <span class="code-number">1e-4</span>)
+hV <span class="code-operator">=</span> max(min(max(parameters[<span class="code-string">"IV"</span>] <span class="code-operator">*</span> VOL_BUMP_RELATIVE, VOL_BUMP_ABSOLUTE), parameters[<span class="code-string">"IV"</span>] <span class="code-operator">*</span> <span class="code-number">0.50</span>), <span class="code-number">1e-4</span>)
+hR <span class="code-operator">=</span> RATE_BUMP_ABSOLUTE
+
+p_S_up <span class="code-operator">=</span> _monte_carlo_price_batched(_copy_parameters_with_updates(parameters, spot<span class="code-operator">=</span>parameters[<span class="code-string">"spot"</span>] <span class="code-operator">+</span> hS), greek_simulations)
+p_S_down <span class="code-operator">=</span> _monte_carlo_price_batched(_copy_parameters_with_updates(parameters, spot<span class="code-operator">=</span>parameters[<span class="code-string">"spot"</span>] <span class="code-operator">-</span> hS), greek_simulations)
+
+delta <span class="code-operator">=</span> (p_S_up <span class="code-operator">-</span> p_S_down) <span class="code-operator">/</span> (<span class="code-number">2</span> <span class="code-operator">*</span> hS)
+gamma <span class="code-operator">=</span> (p_S_up <span class="code-operator">-</span> <span class="code-number">2</span> <span class="code-operator">*</span> greek_base <span class="code-operator">+</span> p_S_down) <span class="code-operator">/</span> (hS<span class="code-operator">**</span><span class="code-number">2</span>)</code></pre>
+            </div>
+          </article>
+
+          <article class="breakdown-card reveal">
+            <h3>9. Interactive Streamlit Interface</h3>
+            <p>
+              The Streamlit interface allows the user to select the data source, pricing method, option type, maturity, strike, volatility mode, and number of Monte Carlo simulations without modifying the Python code.
+            </p>
+            <div class="code-window">
+              <div class="code-window-header">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span>app.py - Streamlit app</span>
+              </div>
+              <pre><code><span class="code-keyword">def</span> <span class="code-function">streamlit_app</span>():
+    st.set_page_config(page_title<span class="code-operator">=</span><span class="code-string">"Option Pricer"</span>, layout<span class="code-operator">=</span><span class="code-string">"wide"</span>)
+    st.title(<span class="code-string">"Option Pricer"</span>)
+
+    <span class="code-keyword">with</span> st.sidebar:
+        st.header(<span class="code-string">"Settings"</span>)
+        data_source <span class="code-operator">=</span> st.radio(<span class="code-string">"Input source"</span>, [<span class="code-string">"Yahoo Finance"</span>, <span class="code-string">"Manual inputs"</span>])
+        pricing_choice <span class="code-operator">=</span> st.radio(<span class="code-string">"Pricing method"</span>, [<span class="code-string">"Black-Scholes"</span>, <span class="code-string">"Monte Carlo"</span>, <span class="code-string">"Both"</span>])
+        num_simulations <span class="code-operator">=</span> st.slider(<span class="code-string">"Monte Carlo simulations"</span>, <span class="code-number">100_000</span>, <span class="code-number">1_000_000</span>, <span class="code-number">500_000</span>)
+
+    parameters <span class="code-operator">=</span> get_yahoo_parameters() <span class="code-keyword">if</span> data_source <span class="code-operator">==</span> <span class="code-string">"Yahoo Finance"</span> <span class="code-keyword">else</span> get_manual_parameters()
+
+    <span class="code-keyword">if</span> st.button(<span class="code-string">"Run pricing"</span>, type<span class="code-operator">=</span><span class="code-string">"primary"</span>, use_container_width<span class="code-operator">=</span><span class="code-keyword">True</span>):
+        results <span class="code-operator">=</span> {}
+        results[<span class="code-string">"Black-Scholes"</span>] <span class="code-operator">=</span> calculate_black_scholes(parameters)
+        results[<span class="code-string">"Monte Carlo"</span>] <span class="code-operator">=</span> calculate_monte_carlo(parameters, int(num_simulations))
+        display_results_dashboard(parameters, results, num_simulations, selected_methods)</code></pre>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>&copy; <span id="year"></span> Uhlmann Clement</span>
+      <span>Option Pricer</span>
+    </footer>
+
+    <script>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.14 });
+
+      document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
+      document.querySelector("#year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

@@ -9,6 +9,7 @@
     />
     <title>Greeks Curves Dashboard</title>
     <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
     <style>
       .project-breakdown {
         display: flex;
@@ -50,7 +51,7 @@
         overflow: hidden;
         border: 1px solid rgba(255, 255, 255, 0.12);
         border-radius: 8px;
-        background: #0b1020;
+        background: #0d1117;
       }
 
       .code-window-header {
@@ -86,100 +87,16 @@
       }
 
       .code-window code {
-        color: #d9e2f1;
         font-size: 0.92rem;
         line-height: 1.7;
       }
 
+      .code-window pre code.hljs {
+        display: block;
+        background: transparent;
+        padding: 0;
+      }
 
-      /* Static Python syntax highlighting generated with Pygments */
-pre { line-height: 125%; }
-td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-.code-window code .hll { background-color: #49483e }
-.code-window code { background: #272822; color: #F8F8F2 }
-.code-window code .c { color: #959077 } /* Comment */
-.code-window code .err { color: #ED007E; background-color: #1E0010 } /* Error */
-.code-window code .esc { color: #F8F8F2 } /* Escape */
-.code-window code .g { color: #F8F8F2 } /* Generic */
-.code-window code .k { color: #66D9EF } /* Keyword */
-.code-window code .l { color: #AE81FF } /* Literal */
-.code-window code .n { color: #F8F8F2 } /* Name */
-.code-window code .o { color: #FF4689 } /* Operator */
-.code-window code .x { color: #F8F8F2 } /* Other */
-.code-window code .p { color: #F8F8F2 } /* Punctuation */
-.code-window code .ch { color: #959077 } /* Comment.Hashbang */
-.code-window code .cm { color: #959077 } /* Comment.Multiline */
-.code-window code .cp { color: #959077 } /* Comment.Preproc */
-.code-window code .cpf { color: #959077 } /* Comment.PreprocFile */
-.code-window code .c1 { color: #959077 } /* Comment.Single */
-.code-window code .cs { color: #959077 } /* Comment.Special */
-.code-window code .gd { color: #FF4689 } /* Generic.Deleted */
-.code-window code .ge { color: #F8F8F2; font-style: italic } /* Generic.Emph */
-.code-window code .ges { color: #F8F8F2; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
-.code-window code .gr { color: #F8F8F2 } /* Generic.Error */
-.code-window code .gh { color: #F8F8F2 } /* Generic.Heading */
-.code-window code .gi { color: #A6E22E } /* Generic.Inserted */
-.code-window code .go { color: #66D9EF } /* Generic.Output */
-.code-window code .gp { color: #FF4689; font-weight: bold } /* Generic.Prompt */
-.code-window code .gs { color: #F8F8F2; font-weight: bold } /* Generic.Strong */
-.code-window code .gu { color: #959077 } /* Generic.Subheading */
-.code-window code .gt { color: #F8F8F2 } /* Generic.Traceback */
-.code-window code .kc { color: #66D9EF } /* Keyword.Constant */
-.code-window code .kd { color: #66D9EF } /* Keyword.Declaration */
-.code-window code .kn { color: #FF4689 } /* Keyword.Namespace */
-.code-window code .kp { color: #66D9EF } /* Keyword.Pseudo */
-.code-window code .kr { color: #66D9EF } /* Keyword.Reserved */
-.code-window code .kt { color: #66D9EF } /* Keyword.Type */
-.code-window code .ld { color: #E6DB74 } /* Literal.Date */
-.code-window code .m { color: #AE81FF } /* Literal.Number */
-.code-window code .s { color: #E6DB74 } /* Literal.String */
-.code-window code .na { color: #A6E22E } /* Name.Attribute */
-.code-window code .nb { color: #F8F8F2 } /* Name.Builtin */
-.code-window code .nc { color: #A6E22E } /* Name.Class */
-.code-window code .no { color: #66D9EF } /* Name.Constant */
-.code-window code .nd { color: #A6E22E } /* Name.Decorator */
-.code-window code .ni { color: #F8F8F2 } /* Name.Entity */
-.code-window code .ne { color: #A6E22E } /* Name.Exception */
-.code-window code .nf { color: #A6E22E } /* Name.Function */
-.code-window code .nl { color: #F8F8F2 } /* Name.Label */
-.code-window code .nn { color: #F8F8F2 } /* Name.Namespace */
-.code-window code .nx { color: #A6E22E } /* Name.Other */
-.code-window code .py { color: #F8F8F2 } /* Name.Property */
-.code-window code .nt { color: #FF4689 } /* Name.Tag */
-.code-window code .nv { color: #F8F8F2 } /* Name.Variable */
-.code-window code .ow { color: #FF4689 } /* Operator.Word */
-.code-window code .pm { color: #F8F8F2 } /* Punctuation.Marker */
-.code-window code .w { color: #F8F8F2 } /* Text.Whitespace */
-.code-window code .mb { color: #AE81FF } /* Literal.Number.Bin */
-.code-window code .mf { color: #AE81FF } /* Literal.Number.Float */
-.code-window code .mh { color: #AE81FF } /* Literal.Number.Hex */
-.code-window code .mi { color: #AE81FF } /* Literal.Number.Integer */
-.code-window code .mo { color: #AE81FF } /* Literal.Number.Oct */
-.code-window code .sa { color: #E6DB74 } /* Literal.String.Affix */
-.code-window code .sb { color: #E6DB74 } /* Literal.String.Backtick */
-.code-window code .sc { color: #E6DB74 } /* Literal.String.Char */
-.code-window code .dl { color: #E6DB74 } /* Literal.String.Delimiter */
-.code-window code .sd { color: #E6DB74 } /* Literal.String.Doc */
-.code-window code .s2 { color: #E6DB74 } /* Literal.String.Double */
-.code-window code .se { color: #AE81FF } /* Literal.String.Escape */
-.code-window code .sh { color: #E6DB74 } /* Literal.String.Heredoc */
-.code-window code .si { color: #E6DB74 } /* Literal.String.Interpol */
-.code-window code .sx { color: #E6DB74 } /* Literal.String.Other */
-.code-window code .sr { color: #E6DB74 } /* Literal.String.Regex */
-.code-window code .s1 { color: #E6DB74 } /* Literal.String.Single */
-.code-window code .ss { color: #E6DB74 } /* Literal.String.Symbol */
-.code-window code .bp { color: #F8F8F2 } /* Name.Builtin.Pseudo */
-.code-window code .fm { color: #A6E22E } /* Name.Function.Magic */
-.code-window code .vc { color: #F8F8F2 } /* Name.Variable.Class */
-.code-window code .vg { color: #F8F8F2 } /* Name.Variable.Global */
-.code-window code .vi { color: #F8F8F2 } /* Name.Variable.Instance */
-.code-window code .vm { color: #F8F8F2 } /* Name.Variable.Magic */
-.code-window code .il { color: #AE81FF } /* Literal.Number.Integer.Long */
-      .code-window code .hll { background-color: #49483e; }
-      .code-window code { display: block; }
 
 
       .project-facts {
@@ -274,25 +191,25 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                 <span class="code-dot"></span>
                 <span>app.py - Greeks taxonomy</span>
               </div>
-              <pre><code class="language-python"><span class="n">CORE_GREEK_NAMES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span> <span class="s2">&quot;Delta&quot;</span><span class="p">,</span> <span class="s2">&quot;Gamma&quot;</span><span class="p">,</span> <span class="s2">&quot;Vega&quot;</span><span class="p">,</span> <span class="s2">&quot;Theta&quot;</span><span class="p">,</span> <span class="s2">&quot;Rho&quot;</span><span class="p">,</span> <span class="s2">&quot;Volga&quot;</span><span class="p">,</span> <span class="s2">&quot;Vanna&quot;</span><span class="p">]</span>
-<span class="n">ADVANCED_GREEK_NAMES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Charm&quot;</span><span class="p">,</span> <span class="s2">&quot;Speed&quot;</span><span class="p">,</span> <span class="s2">&quot;Color&quot;</span><span class="p">,</span> <span class="s2">&quot;Zomma&quot;</span><span class="p">,</span> <span class="s2">&quot;Veta&quot;</span><span class="p">,</span> <span class="s2">&quot;Vera&quot;</span><span class="p">,</span> <span class="s2">&quot;Ultima&quot;</span><span class="p">]</span>
-<span class="n">GREEK_NAMES</span> <span class="o">=</span> <span class="n">CORE_GREEK_NAMES</span> <span class="o">+</span> <span class="n">ADVANCED_GREEK_NAMES</span>
+              <pre><code class="language-python">CORE_GREEK_NAMES = [&quot;Price&quot;, &quot;Delta&quot;, &quot;Gamma&quot;, &quot;Vega&quot;, &quot;Theta&quot;, &quot;Rho&quot;, &quot;Volga&quot;, &quot;Vanna&quot;]
+ADVANCED_GREEK_NAMES = [&quot;Charm&quot;, &quot;Speed&quot;, &quot;Color&quot;, &quot;Zomma&quot;, &quot;Veta&quot;, &quot;Vera&quot;, &quot;Ultima&quot;]
+GREEK_NAMES = CORE_GREEK_NAMES + ADVANCED_GREEK_NAMES
 
-<span class="n">FIRST_ORDER_GREEKS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Delta&quot;</span><span class="p">,</span> <span class="s2">&quot;Vega&quot;</span><span class="p">,</span> <span class="s2">&quot;Theta&quot;</span><span class="p">,</span> <span class="s2">&quot;Rho&quot;</span><span class="p">]</span>
-<span class="n">SECOND_ORDER_GREEKS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Gamma&quot;</span><span class="p">,</span> <span class="s2">&quot;Volga&quot;</span><span class="p">,</span> <span class="s2">&quot;Vanna&quot;</span><span class="p">,</span> <span class="s2">&quot;Charm&quot;</span><span class="p">,</span> <span class="s2">&quot;Veta&quot;</span><span class="p">,</span> <span class="s2">&quot;Vera&quot;</span><span class="p">]</span>
-<span class="n">THIRD_ORDER_GREEKS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Speed&quot;</span><span class="p">,</span> <span class="s2">&quot;Color&quot;</span><span class="p">,</span> <span class="s2">&quot;Zomma&quot;</span><span class="p">,</span> <span class="s2">&quot;Ultima&quot;</span><span class="p">]</span>
+FIRST_ORDER_GREEKS = [&quot;Delta&quot;, &quot;Vega&quot;, &quot;Theta&quot;, &quot;Rho&quot;]
+SECOND_ORDER_GREEKS = [&quot;Gamma&quot;, &quot;Volga&quot;, &quot;Vanna&quot;, &quot;Charm&quot;, &quot;Veta&quot;, &quot;Vera&quot;]
+THIRD_ORDER_GREEKS = [&quot;Speed&quot;, &quot;Color&quot;, &quot;Zomma&quot;, &quot;Ultima&quot;]
 
-<span class="k">def</span><span class="w"> </span><span class="nf">build_selected_greek_names</span><span class="p">(</span><span class="n">include_first_order</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_second_order</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_third_order</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="n">selected</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Price&quot;</span><span class="p">}</span>
+def build_selected_greek_names(include_first_order=True, include_second_order=True, include_third_order=True):
+    selected = {&quot;Price&quot;}
 
-    <span class="k">if</span> <span class="n">include_first_order</span><span class="p">:</span>
-        <span class="n">selected</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">FIRST_ORDER_GREEKS</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">include_second_order</span><span class="p">:</span>
-        <span class="n">selected</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">SECOND_ORDER_GREEKS</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">include_third_order</span><span class="p">:</span>
-        <span class="n">selected</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">THIRD_ORDER_GREEKS</span><span class="p">)</span>
+    if include_first_order:
+        selected.update(FIRST_ORDER_GREEKS)
+    if include_second_order:
+        selected.update(SECOND_ORDER_GREEKS)
+    if include_third_order:
+        selected.update(THIRD_ORDER_GREEKS)
 
-    <span class="k">return</span> <span class="p">[</span><span class="n">greek_name</span> <span class="k">for</span> <span class="n">greek_name</span> <span class="ow">in</span> <span class="n">GREEK_NAMES</span> <span class="k">if</span> <span class="n">greek_name</span> <span class="ow">in</span> <span class="n">selected</span><span class="p">]</span></code></pre>
+    return [greek_name for greek_name in GREEK_NAMES if greek_name in selected]</code></pre>
             </div>
           </article>
 
@@ -308,34 +225,34 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                 <span class="code-dot"></span>
                 <span>app.py - option chain cleaning</span>
               </div>
-              <pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">load_option_data</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">quote_option_type</span><span class="p">):</span>
-    <span class="n">ticker</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">Ticker</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span>
-    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+              <pre><code class="language-python">def load_option_data(symbol, quote_option_type):
+    ticker = yf.Ticker(symbol)
+    rows = []
+    today = datetime.today()
 
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">maturities</span> <span class="o">=</span> <span class="n">ticker</span><span class="o">.</span><span class="n">options</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="n">maturities</span> <span class="o">=</span> <span class="p">[]</span>
+    try:
+        maturities = ticker.options
+    except Exception:
+        maturities = []
 
-    <span class="k">for</span> <span class="n">maturity_string</span> <span class="ow">in</span> <span class="n">maturities</span><span class="p">:</span>
-        <span class="n">maturity_dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">maturity_string</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+    for maturity_string in maturities:
+        maturity_dt = datetime.strptime(maturity_string, &quot;%Y-%m-%d&quot;)
 
-        <span class="k">if</span> <span class="n">maturity_dt</span> <span class="o">&lt;=</span> <span class="n">today</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-            <span class="k">continue</span>
+        if maturity_dt &lt;= today + timedelta(days=1):
+            continue
 
-        <span class="n">chain</span> <span class="o">=</span> <span class="n">ticker</span><span class="o">.</span><span class="n">option_chain</span><span class="p">(</span><span class="n">maturity_string</span><span class="p">)</span>
-        <span class="n">chain_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">calls</span> <span class="k">if</span> <span class="n">quote_option_type</span> <span class="o">==</span> <span class="s2">&quot;Calls&quot;</span> <span class="k">else</span> <span class="n">chain</span><span class="o">.</span><span class="n">puts</span><span class="p">)</span>
-        <span class="n">chain_df</span><span class="p">[</span><span class="s2">&quot;option_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">quote_option_type</span>
-        <span class="n">chain_df</span><span class="p">[</span><span class="s2">&quot;maturity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">maturity_string</span>
-        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chain_df</span><span class="p">)</span>
+        chain = ticker.option_chain(maturity_string)
+        chain_df = pd.DataFrame(chain.calls if quote_option_type == &quot;Calls&quot; else chain.puts)
+        chain_df[&quot;option_type&quot;] = quote_option_type
+        chain_df[&quot;maturity&quot;] = maturity_string
+        rows.append(chain_df)
 
-    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;mid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;bid&quot;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;coerce&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;ask&quot;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;coerce&quot;</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;strike&quot;</span><span class="p">,</span> <span class="s2">&quot;bid&quot;</span><span class="p">,</span> <span class="s2">&quot;ask&quot;</span><span class="p">,</span> <span class="s2">&quot;mid&quot;</span><span class="p">])</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;strike&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;bid&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;ask&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;mid&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)]</span>
+    data = pd.concat(rows, ignore_index=True)
+    data[&quot;mid&quot;] = (pd.to_numeric(data[&quot;bid&quot;], errors=&quot;coerce&quot;) + pd.to_numeric(data[&quot;ask&quot;], errors=&quot;coerce&quot;)) / 2
+    data = data.dropna(subset=[&quot;strike&quot;, &quot;bid&quot;, &quot;ask&quot;, &quot;mid&quot;])
+    data = data[(data[&quot;strike&quot;] &gt; 0) &amp; (data[&quot;bid&quot;] &gt;= 0) &amp; (data[&quot;ask&quot;] &gt; 0) &amp; (data[&quot;mid&quot;] &gt; 0)]
 
-    <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code></pre>
+    return data.reset_index(drop=True)</code></pre>
             </div>
           </article>
 
@@ -351,25 +268,25 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                 <span class="code-dot"></span>
                 <span>app.py - rates and dividend yield</span>
               </div>
-              <pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">load_risk_free_rate</span><span class="p">(</span><span class="n">currency</span><span class="p">):</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">currency</span> <span class="o">==</span> <span class="s2">&quot;USD&quot;</span><span class="p">:</span>
-            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://fred.stlouisfed.org/graph/fredgraph.csv?id=SOFR&quot;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;SOFR&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;.&quot;</span><span class="p">][</span><span class="s2">&quot;SOFR&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">100</span>
+              <pre><code class="language-python">def load_risk_free_rate(currency):
+    try:
+        if currency == &quot;USD&quot;:
+            df = pd.read_csv(&quot;https://fred.stlouisfed.org/graph/fredgraph.csv?id=SOFR&quot;)
+            return float(df[df[&quot;SOFR&quot;] != &quot;.&quot;][&quot;SOFR&quot;].iloc[-1]) / 100
 
-        <span class="k">if</span> <span class="n">currency</span> <span class="o">==</span> <span class="s2">&quot;EUR&quot;</span><span class="p">:</span>
-            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://fred.stlouisfed.org/graph/fredgraph.csv?id=ECBESTRVOLWGTTRMDMNRT&quot;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;ECBESTRVOLWGTTRMDMNRT&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;.&quot;</span><span class="p">][</span><span class="s2">&quot;ECBESTRVOLWGTTRMDMNRT&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">100</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="k">pass</span>
+        if currency == &quot;EUR&quot;:
+            df = pd.read_csv(&quot;https://fred.stlouisfed.org/graph/fredgraph.csv?id=ECBESTRVOLWGTTRMDMNRT&quot;)
+            return float(df[df[&quot;ECBESTRVOLWGTTRMDMNRT&quot;] != &quot;.&quot;][&quot;ECBESTRVOLWGTTRMDMNRT&quot;].iloc[-1]) / 100
+    except Exception:
+        pass
 
-    <span class="k">return</span> <span class="n">DEFAULT_RISK_FREE_RATE</span>
+    return DEFAULT_RISK_FREE_RATE
 
-<span class="k">def</span><span class="w"> </span><span class="nf">load_dividend_yield</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">spot</span><span class="p">):</span>
-    <span class="n">dividends</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">Ticker</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span><span class="o">.</span><span class="n">dividends</span>
-    <span class="n">recent_dividends</span> <span class="o">=</span> <span class="n">dividends</span><span class="p">[</span><span class="n">dividends</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="n">one_year_ago</span><span class="p">]</span>
-    <span class="n">dividend_yield</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">recent_dividends</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">/</span> <span class="n">spot</span>
-    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">dividend_yield</span><span class="p">),</span> <span class="n">annual_dividend</span><span class="p">,</span> <span class="n">method</span></code></pre>
+def load_dividend_yield(symbol, spot):
+    dividends = yf.Ticker(symbol).dividends
+    recent_dividends = dividends[dividends.index &gt;= one_year_ago]
+    dividend_yield = float(recent_dividends.sum()) / spot
+    return float(dividend_yield), annual_dividend, method</code></pre>
             </div>
           </article>
 
@@ -385,27 +302,27 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                 <span class="code-dot"></span>
                 <span>app.py - pricing engines</span>
               </div>
-              <pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">vanilla_price</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">option_type</span><span class="p">):</span>
-    <span class="n">d1</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">S</span> <span class="o">/</span> <span class="n">K</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">q</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">tau</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">tau</span><span class="p">))</span>
-    <span class="n">d2</span> <span class="o">=</span> <span class="n">d1</span> <span class="o">-</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span>
+              <pre><code class="language-python">def vanilla_price(S, K, tau, sigma, r, q, option_type):
+    d1 = (np.log(S / K) + (r - q + 0.5 * sigma**2) * tau) / (sigma * np.sqrt(tau))
+    d2 = d1 - sigma * np.sqrt(tau)
 
-    <span class="k">if</span> <span class="n">option_type</span> <span class="o">==</span> <span class="s2">&quot;Calls&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">S</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">q</span> <span class="o">*</span> <span class="n">tau</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="o">-</span> <span class="n">K</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">tau</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span>
+    if option_type == &quot;Calls&quot;:
+        return S * np.exp(-q * tau) * norm.cdf(d1) - K * np.exp(-r * tau) * norm.cdf(d2)
 
-    <span class="k">if</span> <span class="n">option_type</span> <span class="o">==</span> <span class="s2">&quot;Puts&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">K</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">tau</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="n">d2</span><span class="p">)</span> <span class="o">-</span> <span class="n">S</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">q</span> <span class="o">*</span> <span class="n">tau</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="n">d1</span><span class="p">)</span>
+    if option_type == &quot;Puts&quot;:
+        return K * np.exp(-r * tau) * norm.cdf(-d2) - S * np.exp(-q * tau) * norm.cdf(-d1)
 
-<span class="k">def</span><span class="w"> </span><span class="nf">monte_carlo_price_single_batch</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">num_simulations</span><span class="p">,</span> <span class="n">seed</span><span class="p">):</span>
-    <span class="n">n_steps</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">tau</span> <span class="o">*</span> <span class="n">FIXED_STEPS_PER_YEAR</span><span class="p">)))</span>
-    <span class="n">dt</span> <span class="o">=</span> <span class="n">tau</span> <span class="o">/</span> <span class="n">n_steps</span>
-    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-    <span class="n">z</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">num_simulations</span><span class="p">),</span> <span class="n">n_steps</span><span class="p">))</span>
+def monte_carlo_price_single_batch(parameters, num_simulations, seed):
+    n_steps = max(1, int(np.ceil(tau * FIXED_STEPS_PER_YEAR)))
+    dt = tau / n_steps
+    rng = np.random.default_rng(seed)
+    z = rng.standard_normal((int(num_simulations), n_steps))
 
-    <span class="n">log_returns</span> <span class="o">=</span> <span class="p">(</span><span class="n">risk_free_rate</span> <span class="o">-</span> <span class="n">dividend_yield</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">volatility</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">+</span> <span class="n">volatility</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span> <span class="o">*</span> <span class="n">z</span>
-    <span class="n">paths</span> <span class="o">=</span> <span class="n">spot</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">log_returns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-    <span class="n">terminal_spot</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    log_returns = (risk_free_rate - dividend_yield - 0.5 * volatility**2) * dt + volatility * np.sqrt(dt) * z
+    paths = spot * np.exp(np.cumsum(log_returns, axis=1))
+    terminal_spot = paths[:, -1]
 
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">risk_free_rate</span> <span class="o">*</span> <span class="n">tau</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">payoffs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span></code></pre>
+    return np.exp(-risk_free_rate * tau) * np.mean(np.asarray(payoffs, dtype=float))</code></pre>
             </div>
           </article>
 
@@ -421,21 +338,21 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                 <span class="code-dot"></span>
                 <span>app.py - exotic option universe</span>
               </div>
-              <pre><code class="language-python"><span class="n">VANILLA_TYPES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Calls&quot;</span><span class="p">,</span> <span class="s2">&quot;Puts&quot;</span><span class="p">]</span>
-<span class="n">DIGITAL_TYPES</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;Digital Calls Cash or Nothing&quot;</span><span class="p">,</span> <span class="s2">&quot;Digital Puts Cash or Nothing&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Digital Calls Asset or Nothing&quot;</span><span class="p">,</span> <span class="s2">&quot;Digital Puts Asset or Nothing&quot;</span><span class="p">,</span>
-<span class="p">]</span>
-<span class="n">BARRIER_TYPES</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;Calls Up and In&quot;</span><span class="p">,</span> <span class="s2">&quot;Calls Up and Out&quot;</span><span class="p">,</span> <span class="s2">&quot;Calls Down and In&quot;</span><span class="p">,</span> <span class="s2">&quot;Calls Down and Out&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Puts Up and In&quot;</span><span class="p">,</span> <span class="s2">&quot;Puts Up and Out&quot;</span><span class="p">,</span> <span class="s2">&quot;Puts Down and In&quot;</span><span class="p">,</span> <span class="s2">&quot;Puts Down and Out&quot;</span><span class="p">,</span>
-<span class="p">]</span>
-<span class="n">EXTRA_STRIKE_TYPES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Gap Calls&quot;</span><span class="p">,</span> <span class="s2">&quot;Gap Puts&quot;</span><span class="p">,</span> <span class="s2">&quot;Capped Calls&quot;</span><span class="p">,</span> <span class="s2">&quot;Capped Puts&quot;</span><span class="p">]</span>
-<span class="n">EXOTIC_OPTION_TYPES</span> <span class="o">=</span> <span class="n">VANILLA_TYPES</span> <span class="o">+</span> <span class="n">DIGITAL_TYPES</span> <span class="o">+</span> <span class="n">BARRIER_TYPES</span> <span class="o">+</span> <span class="n">EXTRA_STRIKE_TYPES</span>
+              <pre><code class="language-python">VANILLA_TYPES = [&quot;Calls&quot;, &quot;Puts&quot;]
+DIGITAL_TYPES = [
+    &quot;Digital Calls Cash or Nothing&quot;, &quot;Digital Puts Cash or Nothing&quot;,
+    &quot;Digital Calls Asset or Nothing&quot;, &quot;Digital Puts Asset or Nothing&quot;,
+]
+BARRIER_TYPES = [
+    &quot;Calls Up and In&quot;, &quot;Calls Up and Out&quot;, &quot;Calls Down and In&quot;, &quot;Calls Down and Out&quot;,
+    &quot;Puts Up and In&quot;, &quot;Puts Up and Out&quot;, &quot;Puts Down and In&quot;, &quot;Puts Down and Out&quot;,
+]
+EXTRA_STRIKE_TYPES = [&quot;Gap Calls&quot;, &quot;Gap Puts&quot;, &quot;Capped Calls&quot;, &quot;Capped Puts&quot;]
+EXOTIC_OPTION_TYPES = VANILLA_TYPES + DIGITAL_TYPES + BARRIER_TYPES + EXTRA_STRIKE_TYPES
 
-<span class="k">if</span> <span class="n">option_type</span> <span class="ow">in</span> <span class="n">BARRIER_TYPES</span><span class="p">:</span>
-    <span class="n">barrier_touched</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">barrier</span> <span class="k">if</span> <span class="n">is_up</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">barrier</span>
-    <span class="n">payoffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">barrier_touched</span><span class="p">,</span> <span class="n">vanilla_payoff</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span> <span class="k">if</span> <span class="n">is_in</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="o">~</span><span class="n">barrier_touched</span><span class="p">,</span> <span class="n">vanilla_payoff</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span></code></pre>
+if option_type in BARRIER_TYPES:
+    barrier_touched = np.max(paths, axis=1) &gt;= barrier if is_up else np.min(paths, axis=1) &lt;= barrier
+    payoffs = np.where(barrier_touched, vanilla_payoff, 0.0) if is_in else np.where(~barrier_touched, vanilla_payoff, 0.0)</code></pre>
             </div>
           </article>
 
@@ -451,29 +368,29 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                 <span class="code-dot"></span>
                 <span>app.py - Monte Carlo Greeks with price cache</span>
               </div>
-              <pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">calculate_monte_carlo_greeks</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">num_simulations</span><span class="p">,</span> <span class="n">greek_names</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="n">requested_greeks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">greek_names</span> <span class="ow">or</span> <span class="n">GREEK_NAMES</span><span class="p">)</span>
-    <span class="n">price_cache</span> <span class="o">=</span> <span class="p">{}</span>
+              <pre><code class="language-python">def calculate_monte_carlo_greeks(parameters, num_simulations, greek_names=None):
+    requested_greeks = set(greek_names or GREEK_NAMES)
+    price_cache = {}
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">price_at</span><span class="p">(</span><span class="n">spot_value</span><span class="o">=</span><span class="n">base_spot</span><span class="p">,</span> <span class="n">volatility_value</span><span class="o">=</span><span class="n">base_volatility</span><span class="p">,</span> <span class="n">risk_free_rate_value</span><span class="o">=</span><span class="n">base_rate</span><span class="p">,</span> <span class="n">maturity_value</span><span class="o">=</span><span class="n">base_maturity</span><span class="p">):</span>
-        <span class="n">cache_key</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="nb">round</span><span class="p">(</span><span class="n">spot_value</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
-            <span class="nb">round</span><span class="p">(</span><span class="n">volatility_value</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
-            <span class="nb">round</span><span class="p">(</span><span class="n">risk_free_rate_value</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
-            <span class="n">as_datetime</span><span class="p">(</span><span class="n">maturity_value</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">),</span>
-        <span class="p">)</span>
+    def price_at(spot_value=base_spot, volatility_value=base_volatility, risk_free_rate_value=base_rate, maturity_value=base_maturity):
+        cache_key = (
+            round(spot_value, 12),
+            round(volatility_value, 12),
+            round(risk_free_rate_value, 12),
+            as_datetime(maturity_value).strftime(&quot;%Y-%m-%d %H:%M:%S&quot;),
+        )
 
-        <span class="k">if</span> <span class="n">cache_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">price_cache</span><span class="p">:</span>
-            <span class="n">price_cache</span><span class="p">[</span><span class="n">cache_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">monte_carlo_price_batched</span><span class="p">(</span>
-                <span class="n">copy_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">spot</span><span class="o">=</span><span class="n">spot_value</span><span class="p">,</span> <span class="n">IV</span><span class="o">=</span><span class="n">volatility_value</span><span class="p">,</span> <span class="n">rf</span><span class="o">=</span><span class="n">risk_free_rate_value</span><span class="p">,</span> <span class="n">maturity</span><span class="o">=</span><span class="n">maturity_value</span><span class="p">),</span>
-                <span class="n">num_simulations</span><span class="p">,</span>
-            <span class="p">)</span>
+        if cache_key not in price_cache:
+            price_cache[cache_key] = monte_carlo_price_batched(
+                copy_parameters(parameters, spot=spot_value, IV=volatility_value, rf=risk_free_rate_value, maturity=maturity_value),
+                num_simulations,
+            )
 
-        <span class="k">return</span> <span class="n">price_cache</span><span class="p">[</span><span class="n">cache_key</span><span class="p">]</span>
+        return price_cache[cache_key]
 
-    <span class="n">hS</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">base_spot</span><span class="p">)</span> <span class="o">*</span> <span class="n">MONTE_CARLO_SPOT_BUMP_RELATIVE</span><span class="p">,</span> <span class="n">strike</span> <span class="o">*</span> <span class="n">MONTE_CARLO_STRIKE_BUMP_RELATIVE</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">)</span>
-    <span class="n">hV</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">base_volatility</span> <span class="o">*</span> <span class="n">MONTE_CARLO_VOL_BUMP_RELATIVE</span><span class="p">,</span> <span class="n">MONTE_CARLO_VOL_BUMP_ABSOLUTE</span><span class="p">)</span>
-    <span class="n">hR</span> <span class="o">=</span> <span class="n">MONTE_CARLO_RATE_BUMP_ABSOLUTE</span></code></pre>
+    hS = max(abs(base_spot) * MONTE_CARLO_SPOT_BUMP_RELATIVE, strike * MONTE_CARLO_STRIKE_BUMP_RELATIVE, 1e-4)
+    hV = max(base_volatility * MONTE_CARLO_VOL_BUMP_RELATIVE, MONTE_CARLO_VOL_BUMP_ABSOLUTE)
+    hR = MONTE_CARLO_RATE_BUMP_ABSOLUTE</code></pre>
             </div>
           </article>
 
@@ -489,26 +406,26 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                 <span class="code-dot"></span>
                 <span>app.py - implied volatility and smile proxy</span>
               </div>
-              <pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">implied_volatility_from_mid</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">spot</span><span class="p">,</span> <span class="n">risk_free_rate</span><span class="p">,</span> <span class="n">dividend_yield</span><span class="p">):</span>
-    <span class="n">strike</span> <span class="o">=</span> <span class="n">safe_float</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;strike&quot;</span><span class="p">))</span>
-    <span class="n">mid</span> <span class="o">=</span> <span class="n">safe_float</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mid&quot;</span><span class="p">))</span>
-    <span class="n">maturity</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;maturity&quot;</span><span class="p">)</span>
-    <span class="n">option_type</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;option_type&quot;</span><span class="p">)</span>
+              <pre><code class="language-python">def implied_volatility_from_mid(row, spot, risk_free_rate, dividend_yield):
+    strike = safe_float(row.get(&quot;strike&quot;))
+    mid = safe_float(row.get(&quot;mid&quot;))
+    maturity = row.get(&quot;maturity&quot;)
+    option_type = row.get(&quot;option_type&quot;)
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">objective</span><span class="p">(</span><span class="n">volatility</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">vanilla_price</span><span class="p">(</span><span class="n">spot</span><span class="p">,</span> <span class="n">strike</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">volatility</span><span class="p">,</span> <span class="n">risk_free_rate</span><span class="p">,</span> <span class="n">dividend_yield</span><span class="p">,</span> <span class="n">option_type</span><span class="p">)</span> <span class="o">-</span> <span class="n">mid</span>
+    def objective(volatility):
+        return vanilla_price(spot, strike, tau, volatility, risk_free_rate, dividend_yield, option_type) - mid
 
-    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">brentq</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">200</span><span class="p">)),</span> <span class="s2">&quot;Brent root from bid/ask mid&quot;</span>
+    return float(brentq(objective, 1e-6, 5.0, maxiter=200)), &quot;Brent root from bid/ask mid&quot;
 
-<span class="k">def</span><span class="w"> </span><span class="nf">calculate_smile_adjusted_volatility</span><span class="p">(</span><span class="n">option_type</span><span class="p">,</span> <span class="n">strike</span><span class="p">,</span> <span class="n">spot</span><span class="p">,</span> <span class="n">barrier</span><span class="p">,</span> <span class="n">extra_strike</span><span class="p">,</span> <span class="n">iv_points</span><span class="p">,</span> <span class="n">base_iv</span><span class="p">):</span>
-    <span class="n">strike_iv</span> <span class="o">=</span> <span class="n">get_point</span><span class="p">(</span><span class="s2">&quot;Pricing strike&quot;</span><span class="p">,</span> <span class="n">strike</span><span class="p">)</span>
-    <span class="n">atm_iv</span> <span class="o">=</span> <span class="n">get_point</span><span class="p">(</span><span class="s2">&quot;ATM / spot&quot;</span><span class="p">,</span> <span class="n">spot</span><span class="p">)</span>
+def calculate_smile_adjusted_volatility(option_type, strike, spot, barrier, extra_strike, iv_points, base_iv):
+    strike_iv = get_point(&quot;Pricing strike&quot;, strike)
+    atm_iv = get_point(&quot;ATM / spot&quot;, spot)
 
-    <span class="k">if</span> <span class="n">option_type</span> <span class="ow">in</span> <span class="n">BARRIER_TYPES</span><span class="p">:</span>
-        <span class="n">barrier_iv</span> <span class="o">=</span> <span class="n">get_point</span><span class="p">(</span><span class="s2">&quot;Barrier&quot;</span><span class="p">,</span> <span class="n">barrier</span><span class="p">)</span>
-        <span class="n">effective_iv</span> <span class="o">=</span> <span class="n">weighted_average_available</span><span class="p">([(</span><span class="mf">0.50</span><span class="p">,</span> <span class="n">strike_iv</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.30</span><span class="p">,</span> <span class="n">barrier_iv</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.20</span><span class="p">,</span> <span class="n">atm_iv</span><span class="p">)])</span>
+    if option_type in BARRIER_TYPES:
+        barrier_iv = get_point(&quot;Barrier&quot;, barrier)
+        effective_iv = weighted_average_available([(0.50, strike_iv), (0.30, barrier_iv), (0.20, atm_iv)])
 
-    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">effective_iv</span><span class="p">),</span> <span class="n">formula_label</span><span class="p">,</span> <span class="n">diagnostics_df</span></code></pre>
+    return float(effective_iv), formula_label, diagnostics_df</code></pre>
             </div>
           </article>
 
@@ -524,26 +441,26 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                 <span class="code-dot"></span>
                 <span>app.py - curve dataframe and Plotly chart</span>
               </div>
-              <pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">build_greek_curves</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">s_min</span><span class="p">,</span> <span class="n">s_max</span><span class="p">,</span> <span class="n">number_of_points</span><span class="p">,</span> <span class="n">num_simulations</span><span class="p">,</span> <span class="n">greek_names</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="n">spot_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">s_min</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">s_max</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">number_of_points</span><span class="p">))</span>
-    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+              <pre><code class="language-python">def build_greek_curves(parameters, s_min, s_max, number_of_points, num_simulations, greek_names=None):
+    spot_values = np.linspace(float(s_min), float(s_max), int(number_of_points))
+    rows = []
 
-    <span class="k">for</span> <span class="n">spot_value</span> <span class="ow">in</span> <span class="n">spot_values</span><span class="p">:</span>
-        <span class="n">scenario_parameters</span> <span class="o">=</span> <span class="n">parameters_for_spot</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">spot_value</span><span class="p">)</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">calculate_result</span><span class="p">(</span><span class="n">scenario_parameters</span><span class="p">,</span> <span class="n">num_simulations</span><span class="p">,</span> <span class="n">greek_names</span><span class="o">=</span><span class="n">greek_names</span><span class="p">)</span>
-        <span class="n">row</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Spot&quot;</span><span class="p">:</span> <span class="n">spot_value</span><span class="p">}</span>
-        <span class="n">row</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">tuple_to_dict</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
-        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    for spot_value in spot_values:
+        scenario_parameters = parameters_for_spot(parameters, spot_value)
+        result = calculate_result(scenario_parameters, num_simulations, greek_names=greek_names)
+        row = {&quot;Spot&quot;: spot_value}
+        row.update(tuple_to_dict(result))
+        rows.append(row)
 
-    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+    return pd.DataFrame(rows)
 
-<span class="k">def</span><span class="w"> </span><span class="nf">create_greek_curve_figure</span><span class="p">(</span><span class="n">curve_df</span><span class="p">,</span> <span class="n">greek_name</span><span class="p">,</span> <span class="n">current_spot</span><span class="p">,</span> <span class="n">strike</span><span class="p">,</span> <span class="n">forward_price</span><span class="p">,</span> <span class="n">barrier</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">comparison_curve_df</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">curve_df</span><span class="p">[</span><span class="s2">&quot;Spot&quot;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">curve_df</span><span class="p">[</span><span class="n">greek_name</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Base curve&quot;</span><span class="p">))</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">add_vline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">current_spot</span><span class="p">,</span> <span class="n">line_dash</span><span class="o">=</span><span class="s2">&quot;dash&quot;</span><span class="p">,</span> <span class="n">annotation_text</span><span class="o">=</span><span class="s2">&quot;Spot&quot;</span><span class="p">)</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">add_vline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">strike</span><span class="p">,</span> <span class="n">line_dash</span><span class="o">=</span><span class="s2">&quot;dot&quot;</span><span class="p">,</span> <span class="n">annotation_text</span><span class="o">=</span><span class="s2">&quot;Strike&quot;</span><span class="p">)</span>
-    <span class="n">add_forward_marker</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">forward_price</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">fig</span></code></pre>
+def create_greek_curve_figure(curve_df, greek_name, current_spot, strike, forward_price, barrier=None, comparison_curve_df=None):
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=curve_df[&quot;Spot&quot;], y=curve_df[greek_name], mode=&quot;lines&quot;, name=&quot;Base curve&quot;))
+    fig.add_vline(x=current_spot, line_dash=&quot;dash&quot;, annotation_text=&quot;Spot&quot;)
+    fig.add_vline(x=strike, line_dash=&quot;dot&quot;, annotation_text=&quot;Strike&quot;)
+    add_forward_marker(fig, forward_price)
+    return fig</code></pre>
             </div>
           </article>
 
@@ -559,28 +476,28 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                 <span class="code-dot"></span>
                 <span>app.py - scenario sliders and Streamlit dashboard</span>
               </div>
-              <pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">render_interactive_curve_slider_tab</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">number_of_points</span><span class="p">,</span> <span class="n">num_simulations</span><span class="p">,</span> <span class="n">default_greek_names</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">st</span><span class="o">.</span><span class="n">form</span><span class="p">(</span><span class="s2">&quot;scenario_curve_form&quot;</span><span class="p">):</span>
-        <span class="n">st</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="s2">&quot;**Greeks to recalculate**&quot;</span><span class="p">)</span>
-        <span class="n">selected_greeks</span> <span class="o">=</span> <span class="n">render_greek_order_checkboxes</span><span class="p">(</span><span class="n">key_prefix</span><span class="o">=</span><span class="s2">&quot;scenario_greek_order&quot;</span><span class="p">)</span>
-        <span class="n">scenario_parameters</span> <span class="o">=</span> <span class="n">build_scenario_parameters_from_sliders</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">key_prefix</span><span class="o">=</span><span class="s2">&quot;curve_scenario&quot;</span><span class="p">)</span>
-        <span class="n">submitted</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">form_submit_button</span><span class="p">(</span><span class="s2">&quot;Update scenario curves&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="p">,</span> <span class="n">use_container_width</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+              <pre><code class="language-python">def render_interactive_curve_slider_tab(parameters, number_of_points, num_simulations, default_greek_names=None):
+    with st.form(&quot;scenario_curve_form&quot;):
+        st.markdown(&quot;**Greeks to recalculate**&quot;)
+        selected_greeks = render_greek_order_checkboxes(key_prefix=&quot;scenario_greek_order&quot;)
+        scenario_parameters = build_scenario_parameters_from_sliders(parameters, key_prefix=&quot;curve_scenario&quot;)
+        submitted = st.form_submit_button(&quot;Update scenario curves&quot;, type=&quot;primary&quot;, use_container_width=True)
 
-    <span class="k">if</span> <span class="n">submitted</span><span class="p">:</span>
-        <span class="n">scenario_curve_df</span> <span class="o">=</span> <span class="n">build_greek_curves</span><span class="p">(</span>
-            <span class="n">parameters</span><span class="o">=</span><span class="n">scenario_parameters</span><span class="p">,</span>
-            <span class="n">s_min</span><span class="o">=</span><span class="n">scenario_spot</span> <span class="o">*</span> <span class="n">S_GRID_MIN_MULTIPLIER</span><span class="p">,</span>
-            <span class="n">s_max</span><span class="o">=</span><span class="n">scenario_spot</span> <span class="o">*</span> <span class="n">S_GRID_MAX_MULTIPLIER</span><span class="p">,</span>
-            <span class="n">number_of_points</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">number_of_points</span><span class="p">),</span>
-            <span class="n">num_simulations</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">num_simulations</span><span class="p">),</span>
-            <span class="n">greek_names</span><span class="o">=</span><span class="n">selected_greeks</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s2">&quot;scenario_curve_df&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scenario_curve_df</span>
+    if submitted:
+        scenario_curve_df = build_greek_curves(
+            parameters=scenario_parameters,
+            s_min=scenario_spot * S_GRID_MIN_MULTIPLIER,
+            s_max=scenario_spot * S_GRID_MAX_MULTIPLIER,
+            number_of_points=int(number_of_points),
+            num_simulations=int(num_simulations),
+            greek_names=selected_greeks,
+        )
+        st.session_state[&quot;scenario_curve_df&quot;] = scenario_curve_df
 
-<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">set_page_config</span><span class="p">(</span><span class="n">page_title</span><span class="o">=</span><span class="s2">&quot;Greeks Curves Dashboard&quot;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="s2">&quot;wide&quot;</span><span class="p">)</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Greeks Curves Dashboard&quot;</span><span class="p">)</span>
-    <span class="n">st</span><span class="o">.</span><span class="n">caption</span><span class="p">(</span><span class="s2">&quot;Choose manual inputs or Yahoo Finance data, then visualize Price and Greeks as functions of the underlying price S.&quot;</span><span class="p">)</span></code></pre>
+def main():
+    st.set_page_config(page_title=&quot;Greeks Curves Dashboard&quot;, layout=&quot;wide&quot;)
+    st.title(&quot;Greeks Curves Dashboard&quot;)
+    st.caption(&quot;Choose manual inputs or Yahoo Finance data, then visualize Price and Greeks as functions of the underlying price S.&quot;)</code></pre>
             </div>
           </article>
         </div>
@@ -591,6 +508,9 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
       <span>&copy; <span id="year"></span> Uhlmann Clement</span>
       <span>Greeks Curves Dashboard</span>
     </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 
     <script>
       const observer = new IntersectionObserver((entries) => {

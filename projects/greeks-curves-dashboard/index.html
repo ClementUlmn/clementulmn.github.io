@@ -1,1 +1,518 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Python Streamlit dashboard for option risk analysis, visualizing option prices and Greeks curves across spot scenarios with Black-Scholes, Monte Carlo pricing, Yahoo Finance option chains, and a smile-adjusted volatility proxy."
+    />
+    <title>Greeks Curves Dashboard</title>
+    <link rel="stylesheet" href="../../style.css" />
+    <style>
+      .project-breakdown {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+      }
 
+      .breakdown-card {
+        width: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.045);
+        padding: clamp(22px, 4vw, 38px);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
+      }
+
+      .breakdown-card h3 {
+        margin: 0 0 12px;
+        font-size: clamp(1.25rem, 2vw, 1.75rem);
+      }
+
+      .breakdown-card p {
+        max-width: 850px;
+        margin: 0 0 20px;
+        color: var(--muted, #a8b0bd);
+        line-height: 1.7;
+      }
+
+      .breakdown-card ul {
+        margin: 0 0 22px;
+        padding-left: 18px;
+        color: var(--muted, #a8b0bd);
+        line-height: 1.8;
+      }
+
+      .code-window {
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        background: #0b1020;
+      }
+
+      .code-window-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        color: #8ea0b8;
+        font-size: 0.82rem;
+      }
+
+      .code-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: #42d392;
+      }
+
+      .code-dot:nth-child(2) {
+        background: #f6c177;
+      }
+
+      .code-dot:nth-child(3) {
+        background: #ef6b73;
+        margin-right: 8px;
+      }
+
+      .code-window pre {
+        margin: 0;
+        padding: 20px;
+        overflow-x: auto;
+      }
+
+      .code-window code {
+        color: #d9e2f1;
+        font-size: 0.92rem;
+        line-height: 1.7;
+      }
+
+      .project-facts {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 14px;
+        margin: 22px 0 0;
+      }
+
+      .project-fact {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 14px 16px;
+        background: rgba(255, 255, 255, 0.035);
+      }
+
+      .project-fact strong {
+        display: block;
+        margin-bottom: 6px;
+        color: #ffffff;
+      }
+
+      .project-fact span {
+        color: var(--muted, #a8b0bd);
+        font-size: 0.94rem;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="../../index.html">Uhlmann Clement</a>
+        <div class="nav-links">
+          <a href="../../index.html#projects">Projects</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="hero project-detail-hero">
+        <div class="reveal">
+          <a class="back-link" href="../../index.html#projects">Back to projects</a>
+          <p class="eyebrow">Project 02</p>
+          <h1>Greeks Curves Dashboard</h1>
+          <p>Interactive Python dashboard that visualizes option prices and Greeks as functions of the underlying price, combining Black-Scholes, Monte Carlo pricing, Yahoo Finance option chains, and a smile-adjusted volatility proxy.</p>
+          <div class="actions">
+            <a class="button primary" href="#" target="_blank" rel="noreferrer">Live demo</a>
+            <a class="button secondary" href="#" target="_blank" rel="noreferrer">View full code</a>
+          </div>
+        </div>
+      </div>
+
+      <section class="content-section">
+        <div class="project-breakdown">
+          <article class="breakdown-card reveal">
+            <h3>1. Project Objective</h3>
+            <p>
+              The purpose of this project is to build a derivatives risk dashboard focused on visualizing how option prices and Greeks evolve when the underlying price changes. Instead of returning a single static Greek value, the application generates full curves across a configurable spot grid and adds reference markers for spot, strike, forward price, and barrier levels.
+            </p>
+            <ul>
+              <li>Input: manual option parameters or Yahoo Finance option chains.</li>
+              <li>Pricing: analytical Black-Scholes for vanilla products and Monte Carlo simulation for exotic payoffs.</li>
+              <li>Risk analytics: first-, second-, and third-order Greeks, including Delta, Gamma, Vega, Vanna, Volga, Charm, Speed, Color, Zomma, Veta, Vera, and Ultima.</li>
+              <li>Output: current price/Greeks, interactive Greek curves, scenario comparison, and volatility-smile diagnostics.</li>
+            </ul>
+            <div class="project-facts">
+              <div class="project-fact">
+                <strong>Stack</strong>
+                <span>Python, Streamlit, NumPy, Pandas, Plotly, SciPy, yfinance</span>
+              </div>
+              <div class="project-fact">
+                <strong>Products</strong>
+                <span>Vanilla, digital, barrier, gap, and capped options</span>
+              </div>
+              <div class="project-fact">
+                <strong>Use case</strong>
+                <span>Derivative risk visualization and scenario analysis</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="breakdown-card reveal">
+            <h3>2. Greeks Coverage and Risk Taxonomy</h3>
+            <p>
+              The dashboard organizes risk sensitivities by order. This lets the user choose whether to focus on standard first-order risk, convexity and cross-Greeks, or more advanced third-order sensitivities. Price is always included as the baseline output.
+            </p>
+            <div class="code-window">
+              <div class="code-window-header">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span>app.py - Greeks taxonomy</span>
+              </div>
+              <pre><code>CORE_GREEK_NAMES = [&quot;Price&quot;, &quot;Delta&quot;, &quot;Gamma&quot;, &quot;Vega&quot;, &quot;Theta&quot;, &quot;Rho&quot;, &quot;Volga&quot;, &quot;Vanna&quot;]
+ADVANCED_GREEK_NAMES = [&quot;Charm&quot;, &quot;Speed&quot;, &quot;Color&quot;, &quot;Zomma&quot;, &quot;Veta&quot;, &quot;Vera&quot;, &quot;Ultima&quot;]
+GREEK_NAMES = CORE_GREEK_NAMES + ADVANCED_GREEK_NAMES
+
+FIRST_ORDER_GREEKS = [&quot;Delta&quot;, &quot;Vega&quot;, &quot;Theta&quot;, &quot;Rho&quot;]
+SECOND_ORDER_GREEKS = [&quot;Gamma&quot;, &quot;Volga&quot;, &quot;Vanna&quot;, &quot;Charm&quot;, &quot;Veta&quot;, &quot;Vera&quot;]
+THIRD_ORDER_GREEKS = [&quot;Speed&quot;, &quot;Color&quot;, &quot;Zomma&quot;, &quot;Ultima&quot;]
+
+def build_selected_greek_names(include_first_order=True, include_second_order=True, include_third_order=True):
+    selected = {&quot;Price&quot;}
+
+    if include_first_order:
+        selected.update(FIRST_ORDER_GREEKS)
+    if include_second_order:
+        selected.update(SECOND_ORDER_GREEKS)
+    if include_third_order:
+        selected.update(THIRD_ORDER_GREEKS)
+
+    return [greek_name for greek_name in GREEK_NAMES if greek_name in selected]</code></pre>
+            </div>
+          </article>
+
+          <article class="breakdown-card reveal">
+            <h3>3. Yahoo Finance Data Pipeline</h3>
+            <p>
+              For market-based inputs, the application loads the underlying spot and listed option chains from Yahoo Finance. Quotes are cleaned by removing expired maturities, invalid strikes, unusable bid-ask pairs, and empty mid-prices before they are used for calibration or pricing.
+            </p>
+            <div class="code-window">
+              <div class="code-window-header">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span>app.py - option chain cleaning</span>
+              </div>
+              <pre><code>def load_option_data(symbol, quote_option_type):
+    ticker = yf.Ticker(symbol)
+    rows = []
+    today = datetime.today()
+
+    try:
+        maturities = ticker.options
+    except Exception:
+        maturities = []
+
+    for maturity_string in maturities:
+        maturity_dt = datetime.strptime(maturity_string, &quot;%Y-%m-%d&quot;)
+
+        if maturity_dt &lt;= today + timedelta(days=1):
+            continue
+
+        chain = ticker.option_chain(maturity_string)
+        chain_df = pd.DataFrame(chain.calls if quote_option_type == &quot;Calls&quot; else chain.puts)
+        chain_df[&quot;option_type&quot;] = quote_option_type
+        chain_df[&quot;maturity&quot;] = maturity_string
+        rows.append(chain_df)
+
+    data = pd.concat(rows, ignore_index=True)
+    data[&quot;mid&quot;] = (pd.to_numeric(data[&quot;bid&quot;], errors=&quot;coerce&quot;) + pd.to_numeric(data[&quot;ask&quot;], errors=&quot;coerce&quot;)) / 2
+    data = data.dropna(subset=[&quot;strike&quot;, &quot;bid&quot;, &quot;ask&quot;, &quot;mid&quot;])
+    data = data[(data[&quot;strike&quot;] &gt; 0) &amp; (data[&quot;bid&quot;] &gt;= 0) &amp; (data[&quot;ask&quot;] &gt; 0) &amp; (data[&quot;mid&quot;] &gt; 0)]
+
+    return data.reset_index(drop=True)</code></pre>
+            </div>
+          </article>
+
+          <article class="breakdown-card reveal">
+            <h3>4. Market Inputs: Rates, Dividends, and Carry</h3>
+            <p>
+              The pricing setup includes risk-free rates and dividend yield rather than assuming a zero-carry framework. The application pulls currency-aware rates when possible and estimates dividends from trailing Yahoo Finance dividend data or from the platform dividend-yield field.
+            </p>
+            <div class="code-window">
+              <div class="code-window-header">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span>app.py - rates and dividend yield</span>
+              </div>
+              <pre><code>def load_risk_free_rate(currency):
+    try:
+        if currency == &quot;USD&quot;:
+            df = pd.read_csv(&quot;https://fred.stlouisfed.org/graph/fredgraph.csv?id=SOFR&quot;)
+            return float(df[df[&quot;SOFR&quot;] != &quot;.&quot;][&quot;SOFR&quot;].iloc[-1]) / 100
+
+        if currency == &quot;EUR&quot;:
+            df = pd.read_csv(&quot;https://fred.stlouisfed.org/graph/fredgraph.csv?id=ECBESTRVOLWGTTRMDMNRT&quot;)
+            return float(df[df[&quot;ECBESTRVOLWGTTRMDMNRT&quot;] != &quot;.&quot;][&quot;ECBESTRVOLWGTTRMDMNRT&quot;].iloc[-1]) / 100
+    except Exception:
+        pass
+
+    return DEFAULT_RISK_FREE_RATE
+
+def load_dividend_yield(symbol, spot):
+    dividends = yf.Ticker(symbol).dividends
+    recent_dividends = dividends[dividends.index &gt;= one_year_ago]
+    dividend_yield = float(recent_dividends.sum()) / spot
+    return float(dividend_yield), annual_dividend, method</code></pre>
+            </div>
+          </article>
+
+          <article class="breakdown-card reveal">
+            <h3>5. Pricing Engines: Black-Scholes and Monte Carlo</h3>
+            <p>
+              Vanilla calls and puts are priced with Black-Scholes. Non-vanilla payoffs are handled with a Monte Carlo engine that simulates risk-neutral geometric Brownian motion, evaluates terminal or path-dependent payoffs, and discounts the expected payoff back to present value.
+            </p>
+            <div class="code-window">
+              <div class="code-window-header">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span>app.py - pricing engines</span>
+              </div>
+              <pre><code>def vanilla_price(S, K, tau, sigma, r, q, option_type):
+    d1 = (np.log(S / K) + (r - q + 0.5 * sigma**2) * tau) / (sigma * np.sqrt(tau))
+    d2 = d1 - sigma * np.sqrt(tau)
+
+    if option_type == &quot;Calls&quot;:
+        return S * np.exp(-q * tau) * norm.cdf(d1) - K * np.exp(-r * tau) * norm.cdf(d2)
+
+    if option_type == &quot;Puts&quot;:
+        return K * np.exp(-r * tau) * norm.cdf(-d2) - S * np.exp(-q * tau) * norm.cdf(-d1)
+
+def monte_carlo_price_single_batch(parameters, num_simulations, seed):
+    n_steps = max(1, int(np.ceil(tau * FIXED_STEPS_PER_YEAR)))
+    dt = tau / n_steps
+    rng = np.random.default_rng(seed)
+    z = rng.standard_normal((int(num_simulations), n_steps))
+
+    log_returns = (risk_free_rate - dividend_yield - 0.5 * volatility**2) * dt + volatility * np.sqrt(dt) * z
+    paths = spot * np.exp(np.cumsum(log_returns, axis=1))
+    terminal_spot = paths[:, -1]
+
+    return np.exp(-risk_free_rate * tau) * np.mean(np.asarray(payoffs, dtype=float))</code></pre>
+            </div>
+          </article>
+
+          <article class="breakdown-card reveal">
+            <h3>6. Exotic Payoff Coverage</h3>
+            <p>
+              The Monte Carlo layer supports multiple payoff structures beyond vanilla options. Barrier options use the full simulated path to detect whether the barrier has been touched, while digital, gap, and capped options modify the terminal payoff definition.
+            </p>
+            <div class="code-window">
+              <div class="code-window-header">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span>app.py - exotic option universe</span>
+              </div>
+              <pre><code>VANILLA_TYPES = [&quot;Calls&quot;, &quot;Puts&quot;]
+DIGITAL_TYPES = [
+    &quot;Digital Calls Cash or Nothing&quot;, &quot;Digital Puts Cash or Nothing&quot;,
+    &quot;Digital Calls Asset or Nothing&quot;, &quot;Digital Puts Asset or Nothing&quot;,
+]
+BARRIER_TYPES = [
+    &quot;Calls Up and In&quot;, &quot;Calls Up and Out&quot;, &quot;Calls Down and In&quot;, &quot;Calls Down and Out&quot;,
+    &quot;Puts Up and In&quot;, &quot;Puts Up and Out&quot;, &quot;Puts Down and In&quot;, &quot;Puts Down and Out&quot;,
+]
+EXTRA_STRIKE_TYPES = [&quot;Gap Calls&quot;, &quot;Gap Puts&quot;, &quot;Capped Calls&quot;, &quot;Capped Puts&quot;]
+EXOTIC_OPTION_TYPES = VANILLA_TYPES + DIGITAL_TYPES + BARRIER_TYPES + EXTRA_STRIKE_TYPES
+
+if option_type in BARRIER_TYPES:
+    barrier_touched = np.max(paths, axis=1) &gt;= barrier if is_up else np.min(paths, axis=1) &lt;= barrier
+    payoffs = np.where(barrier_touched, vanilla_payoff, 0.0) if is_in else np.where(~barrier_touched, vanilla_payoff, 0.0)</code></pre>
+            </div>
+          </article>
+
+          <article class="breakdown-card reveal">
+            <h3>7. Finite-Difference Greeks Engine</h3>
+            <p>
+              The Greeks are estimated by bumping spot, volatility, interest rates, and time to maturity. The engine caches Monte Carlo prices for repeated parameter combinations, which avoids recomputing the same scenario multiple times when higher-order Greeks require nested finite differences.
+            </p>
+            <div class="code-window">
+              <div class="code-window-header">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span>app.py - Monte Carlo Greeks with price cache</span>
+              </div>
+              <pre><code>def calculate_monte_carlo_greeks(parameters, num_simulations, greek_names=None):
+    requested_greeks = set(greek_names or GREEK_NAMES)
+    price_cache = {}
+
+    def price_at(spot_value=base_spot, volatility_value=base_volatility, risk_free_rate_value=base_rate, maturity_value=base_maturity):
+        cache_key = (
+            round(spot_value, 12),
+            round(volatility_value, 12),
+            round(risk_free_rate_value, 12),
+            as_datetime(maturity_value).strftime(&quot;%Y-%m-%d %H:%M:%S&quot;),
+        )
+
+        if cache_key not in price_cache:
+            price_cache[cache_key] = monte_carlo_price_batched(
+                copy_parameters(parameters, spot=spot_value, IV=volatility_value, rf=risk_free_rate_value, maturity=maturity_value),
+                num_simulations,
+            )
+
+        return price_cache[cache_key]
+
+    hS = max(abs(base_spot) * MONTE_CARLO_SPOT_BUMP_RELATIVE, strike * MONTE_CARLO_STRIKE_BUMP_RELATIVE, 1e-4)
+    hV = max(base_volatility * MONTE_CARLO_VOL_BUMP_RELATIVE, MONTE_CARLO_VOL_BUMP_ABSOLUTE)
+    hR = MONTE_CARLO_RATE_BUMP_ABSOLUTE</code></pre>
+            </div>
+          </article>
+
+          <article class="breakdown-card reveal">
+            <h3>8. Smile-Adjusted Volatility Proxy</h3>
+            <p>
+              The dashboard can derive vanilla implied volatility points from option mid-prices using a Brent root solver. For exotic products, it builds a pragmatic smile-adjusted volatility proxy by combining the relevant vanilla volatility points: strike, spot, barrier, payoff strike, cap, or floor.
+            </p>
+            <div class="code-window">
+              <div class="code-window-header">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span>app.py - implied volatility and smile proxy</span>
+              </div>
+              <pre><code>def implied_volatility_from_mid(row, spot, risk_free_rate, dividend_yield):
+    strike = safe_float(row.get(&quot;strike&quot;))
+    mid = safe_float(row.get(&quot;mid&quot;))
+    maturity = row.get(&quot;maturity&quot;)
+    option_type = row.get(&quot;option_type&quot;)
+
+    def objective(volatility):
+        return vanilla_price(spot, strike, tau, volatility, risk_free_rate, dividend_yield, option_type) - mid
+
+    return float(brentq(objective, 1e-6, 5.0, maxiter=200)), &quot;Brent root from bid/ask mid&quot;
+
+def calculate_smile_adjusted_volatility(option_type, strike, spot, barrier, extra_strike, iv_points, base_iv):
+    strike_iv = get_point(&quot;Pricing strike&quot;, strike)
+    atm_iv = get_point(&quot;ATM / spot&quot;, spot)
+
+    if option_type in BARRIER_TYPES:
+        barrier_iv = get_point(&quot;Barrier&quot;, barrier)
+        effective_iv = weighted_average_available([(0.50, strike_iv), (0.30, barrier_iv), (0.20, atm_iv)])
+
+    return float(effective_iv), formula_label, diagnostics_df</code></pre>
+            </div>
+          </article>
+
+          <article class="breakdown-card reveal">
+            <h3>9. Greek Curve Construction</h3>
+            <p>
+              The main analytical output is a curve dataframe built by repricing the same option across a grid of underlying prices. Each point stores the option price and the selected Greeks, which are then displayed in Plotly tabs with reference lines for the current spot, strike, forward level, and barrier.
+            </p>
+            <div class="code-window">
+              <div class="code-window-header">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span>app.py - curve dataframe and Plotly chart</span>
+              </div>
+              <pre><code>def build_greek_curves(parameters, s_min, s_max, number_of_points, num_simulations, greek_names=None):
+    spot_values = np.linspace(float(s_min), float(s_max), int(number_of_points))
+    rows = []
+
+    for spot_value in spot_values:
+        scenario_parameters = parameters_for_spot(parameters, spot_value)
+        result = calculate_result(scenario_parameters, num_simulations, greek_names=greek_names)
+        row = {&quot;Spot&quot;: spot_value}
+        row.update(tuple_to_dict(result))
+        rows.append(row)
+
+    return pd.DataFrame(rows)
+
+def create_greek_curve_figure(curve_df, greek_name, current_spot, strike, forward_price, barrier=None, comparison_curve_df=None):
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=curve_df[&quot;Spot&quot;], y=curve_df[greek_name], mode=&quot;lines&quot;, name=&quot;Base curve&quot;))
+    fig.add_vline(x=current_spot, line_dash=&quot;dash&quot;, annotation_text=&quot;Spot&quot;)
+    fig.add_vline(x=strike, line_dash=&quot;dot&quot;, annotation_text=&quot;Strike&quot;)
+    add_forward_marker(fig, forward_price)
+    return fig</code></pre>
+            </div>
+          </article>
+
+          <article class="breakdown-card reveal">
+            <h3>10. Scenario Analysis Interface</h3>
+            <p>
+              After generating the base curves, users can open an interactive scenario tab and modify spot, strike, maturity, volatility, rates, dividend yield, barrier, or extra strike. The app recalculates a new curve and overlays it against the base case, making the dashboard useful for stress testing and sensitivity analysis.
+            </p>
+            <div class="code-window">
+              <div class="code-window-header">
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span class="code-dot"></span>
+                <span>app.py - scenario sliders and Streamlit dashboard</span>
+              </div>
+              <pre><code>def render_interactive_curve_slider_tab(parameters, number_of_points, num_simulations, default_greek_names=None):
+    with st.form(&quot;scenario_curve_form&quot;):
+        st.markdown(&quot;**Greeks to recalculate**&quot;)
+        selected_greeks = render_greek_order_checkboxes(key_prefix=&quot;scenario_greek_order&quot;)
+        scenario_parameters = build_scenario_parameters_from_sliders(parameters, key_prefix=&quot;curve_scenario&quot;)
+        submitted = st.form_submit_button(&quot;Update scenario curves&quot;, type=&quot;primary&quot;, use_container_width=True)
+
+    if submitted:
+        scenario_curve_df = build_greek_curves(
+            parameters=scenario_parameters,
+            s_min=scenario_spot * S_GRID_MIN_MULTIPLIER,
+            s_max=scenario_spot * S_GRID_MAX_MULTIPLIER,
+            number_of_points=int(number_of_points),
+            num_simulations=int(num_simulations),
+            greek_names=selected_greeks,
+        )
+        st.session_state[&quot;scenario_curve_df&quot;] = scenario_curve_df
+
+def main():
+    st.set_page_config(page_title=&quot;Greeks Curves Dashboard&quot;, layout=&quot;wide&quot;)
+    st.title(&quot;Greeks Curves Dashboard&quot;)
+    st.caption(&quot;Choose manual inputs or Yahoo Finance data, then visualize Price and Greeks as functions of the underlying price S.&quot;)</code></pre>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>&copy; <span id="year"></span> Uhlmann Clement</span>
+      <span>Greeks Curves Dashboard</span>
+    </footer>
+
+    <script>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.14 });
+
+      document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
+      document.querySelector("#year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
